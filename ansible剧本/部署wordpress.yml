@@ -1,0 +1,134 @@
+- name: for wp mariadb
+  hosts: db
+  tasks: 
+    - name: install db
+      yum:
+        name: mariadb-server
+        state: present
+    - name: ctl db
+      service: 
+        name: mariadb
+        state: started
+        enabled: yes
+    - name: create databases
+      shell: mysql -e 'create database zxh;'
+    - name: grant all privileges
+      shell: mysql -e "grant all privileges on *.* to 'zxh'@'10.15.200.%' identified by '123.com';"
+    - name: flush pri
+      shell: mysql -e "flush privileges;"
+- name: nfs
+  hosts: nfs
+  tasks: 
+    - name: install nfs-utils rpcbind
+      yum:
+        name: 
+          - nfs-utils
+          - rpcbind
+        state: present
+    - name: 
+      copy: 
+        content: "/opt/zhaojiedong 10.15.200.0/24(rw,sync,all_squash,anonuid=48,anongid=48)"
+        dest: /etc/exports
+    - name: groupadd
+      group: 
+        name: apache
+        gid: 48
+        state: present
+    - name: useradd
+      user: 
+        name: apache
+        uid: 48
+        groups: 48
+        state: present
+    - name: mkdir img
+      file: 
+        path: /opt/zhaojiedong
+        owner: apache
+        group: apache
+        state: directory
+    - name: ctl nfs-utils rpcbind
+      service: 
+        name: "{{ item }}"
+        state: restarted
+        enabled: yes
+      loop: 
+        - nfs-server.service
+        - rpcbind.service
+- name: 部署wordpress
+  hosts: blog
+  tasks:
+    - name: install pack
+      yum: 
+        name: 
+          - httpd
+          - php
+          - php-mysqlnd
+        state: present
+    - name: absent default page
+      file: 
+        path: /etc/httpd/conf,d/welcome.conf
+        state: absent
+    - name: copy wordpress
+      copy: 
+        src: wordpress-6.2.tar.gz
+        dest: /tmp/wordpress-6.2.tar.gz
+    - name: ex wp
+      unarchive: 
+        src: /tmp/wordpress-6.2.tar.gz
+        dest: /var/www/html/
+        remote_src: yes
+    - name: copy
+      copy: 
+        src: /var/www/html/wp-config-sample.php
+        dest: /var/www/html/wp-config.php
+        remote_src: yes
+    - name: replace db_name
+      replace: 
+        path: /var/www/html/wp-config.php
+        regexp: "database_name_here"
+        replace: "zxh"
+    - name: replace db_name
+      replace: 
+        path: /var/www/html/wp-config.php
+        regexp: "database_name_here"
+        replace: "zxh"
+    - name: replace user_name
+      replace: 
+        path: /var/www/html/wp-config.php
+        regexp: "username_here"
+        replace: "zxh"
+    - name: replace passwd
+      replace: 
+        path: /var/www/html/wp-config.php
+        regexp: "password_here"
+        replace: "123.com"
+    - name: replace host
+      replace: 
+        path: /var/www/html/wp-config.php
+        regexp: "localhost"
+        replace: "10.15.200.101"
+    - name: ctl httpd
+      service: 
+        name: httpd
+        state: started
+        enabled: yes
+    - name: mkdir
+      file:
+        path: /var/www/html/wp-content/uploads
+        owner: apache
+        group: apache
+        state: directory
+    - name: install nfs
+      yum: 
+        name: nfs-utils
+        state: present
+    - name: ctl nfs
+      service:
+        name: nfs-utils
+        state: restarted
+    - name: mount
+      mount: 
+        path: /var/www/wp-content/uploads
+        src: 10.15.200.102:/opt/zhaojiedong
+        fstype: nfs
+        state: mounted

@@ -1,0 +1,49 @@
+- name: install
+  hosts: node04
+  tasks:
+    - name: install
+      yum:
+        name:
+          - httpd
+          - php
+          - php-mysqlnd
+        state: present
+    - name: tar
+      unarchive:
+        src: wordpress-6.2.tar.gz
+        dest: /var/www/html
+    - name: copy
+      copy:
+        src: /var/www/html/wp-config-sample.php
+        dest: /var/www/html/wp-config.php
+        remote_src: yes
+    - name: replace db_name
+      replace:
+        path: /var/www/html/wp-config.php
+        regexp: "database_name_here"
+        replace: "zxh"
+    - name: replace db_name
+      replace:
+        path: /var/www/html/wp-config.php
+        regexp: "database_name_here"
+        replace: "zxh"
+    - name: replace user_name
+      replace:
+        path: /var/www/html/wp-config.php
+        regexp: "username_here"
+        replace: "zxh"
+    - name: replace passwd
+      replace:
+        path: /var/www/html/wp-config.php
+        regexp: "password_here"
+        replace: "123.com"
+    - name: replace host
+      replace:
+        path: /var/www/html/wp-config.php
+        regexp: "localhost"
+        replace: "10.15.200.118"
+    - name: ctl httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
