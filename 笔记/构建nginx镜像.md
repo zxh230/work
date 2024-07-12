@@ -12,7 +12,7 @@ mkdir nginx_images/
 cd nginx_images/
 mv ../nginx-1.24.0.tar.gz ./
 vim Dockerfile
-###
+### 最后一个RUN部分echo后面可以更改为自己的姓名或随意
 FROM registry.cn-hangzhou.aliyuncs.com/zxh230/rockylinux:9
 RUN yum -y install iproute iputils procps-ng net-tools make gcc zlib-devel pcre-devel pcre zlib openssl openssl-devel 
 ADD nginx-1.24.0.tar.gz /
