@@ -24,7 +24,7 @@ getenforce     # 验证
 增加三条内核参数
 
 ```shell
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+cat <<EOF | sudo tee /etc/sysctl.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1
@@ -65,13 +65,14 @@ vim /etc/docker/daemon.json
 }
 
 # 重载
-systemctl demon-reload
+systemctl daemon-reload
 systemctl restart docker.service
 docker info
 # 下面的username为阿里云账户名，passwd为你的命名空间密码
 sudo docker login --username=zjd230212 registry.cn-hangzhou.aliyuncs.com
 # 拉取nginx1.20镜像
-docker pull registry.cn-hangzhou.aliyuncs.com/zxh230/nginx:1.20
+docker pull registry.cn-hangzhou.aliyuncs.com/zxh230/nginx:1.24
+docker pull registry.cn-hangzhou.aliyuncs.com/zxh230/busybox:1.36
 ```
 
 
