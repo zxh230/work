@@ -184,7 +184,7 @@ kubeadm config print init-defaults > init.yaml
 vim init.yaml
 ```
 
- ![image-20240722182857213](https://gitee.com/zhaojiedong/img/raw/master/image-20240722182857213.png)
+ ![image-20240723130437806](https://gitee.com/zhaojiedong/img/raw/master/image-20240723130437806.png)
 
 ```shell
 # 开机自启
@@ -257,18 +257,15 @@ systemctl restart rsyslog.service
 tail -f /var/log/messages 
 ```
 
-
-
 ```shell
-busybox:1.36
+# git拉取镜像
 nginx:1.20
 nginx:1.24
-nginx:1.22
 nginx:latest
 mysql:8.0
-grafana/grafana:11.0.0
-prom/node-exporter:v1.8.1
-prom/prometheus:v2.53.0
+grafana/grafana:latest
+prom/node-exporter:latest
+prom/prometheus:latest
 php:8-apache
 registry.k8s.io/metrics-server/metrics-server:v0.6.3
 gcr.io/cadvisor/cadvisor:v0.47.0
@@ -276,15 +273,12 @@ kubernetesui/dashboard:v2.7.0
 kubernetesui/metrics-scraper:v1.0.8
 registry.k8s.io/ingress-nginx/controller:v1.8.0
 registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20230407
-rockylinux:9
-cadvisor:v0.49.2
-metrics-server:v0.7.1
-kube-webhook-certgen:v1.4.1
-controller:v1.10.1
-grafana：10.0.9
-node-exporter：v1.81
-prometheus：2.53.0
-alermanager：0.27.0 
+gcr.io/cadvisor/cadvisor:v0.49.1
+registry.k8s.io/metrics-server/metrics-server:v0.7.1
+registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.1
+registry.k8s.io/ingress-nginx/controller:v1.10.1
+grafana/grafana:10.0.9
+prom/node-exporter:v1.8.1
+prom/prometheus:v2.53.0
+prom/alertmanager:v0.27.0
 ```
-
-kubuadm reset
