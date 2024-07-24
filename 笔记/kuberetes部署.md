@@ -183,10 +183,9 @@ kubeadm config print init-defaults > init.yaml
 vim init.yaml
 ```
 
- ![image-20240723130437806](https://gitee.com/zhaojiedong/img/raw/master/image-20240723130437806.png)
+ ![image-20240724151145548](https://gitee.com/zhaojiedong/img/raw/master/image-20240724151145548.png)
 
 ```shell
-10.96.0.0/12
 # 开机自启
 systemctl enable kubelet.service 
 # 初始化集群
@@ -208,7 +207,7 @@ vim calico.yaml
 # 注意缩进！！！
 ```
 
- ![image-20240722184742461](https://gitee.com/zhaojiedong/img/raw/master/image-20240722184742461.png)
+ ![image-20240724151238403](https://gitee.com/zhaojiedong/img/raw/master/image-20240724151238403.png)
 
 ```shell
 # 开始配置
