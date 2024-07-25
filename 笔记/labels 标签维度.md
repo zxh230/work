@@ -173,11 +173,3 @@ kubectl describe --namespace kube-system pod kube-proxy-jdqlx
 # 数据驱离
 kubectl taint node kube03 node-type=test:NoExecute
 ```
-
-### 亲和性优先级/权重计算
-
-#### 强制亲和
-
-```shell
-```
-
