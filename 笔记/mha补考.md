@@ -222,4 +222,4 @@
 
    日志输出完成后发现vip移动到了node02
 
-   ![image-20240606181502139](https://gitee.com/zhaojiedong/img/raw/master/202406061815176.png)
+    ![image-20240606181502139](https://gitee.com/zhaojiedong/img/raw/master/202406061815176.png)

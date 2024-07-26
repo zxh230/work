@@ -18,7 +18,7 @@
    gpgcheck=0
    enabled=1" >> /etc/yum.repos.d/rocky9.repo
    # 发送目录以及仓库配置到被监控端
-   for h in node0{5,6,7}
+   for h in {node02,node03,ha01,ha02}
    do scp -rq /etc/yum.repos.d/rocky9.repo $h:/etc/yum.repos.d/rocky9.repo
    scp -rq zabbix60/ $h:/root/
    done
