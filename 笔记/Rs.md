@@ -1,6 +1,44 @@
 ### Rs
 
 ```shell
+ 1 # 声明api的版本。
+ 2 apiVersion: v1
+ 3 # kind代表资源的类型，资源是ReplicationController。
+ 4 kind: ReplicationController
+ 5 # 资源叫什么名字，是在其属性metadata里面的。
+ 6 metadata:
+ 7   # 第一个属性name的值是myweb，即ReplicationController的名字就叫做myweb。
+ 8   name: myweb
+ 9 # spec是详细，详细里面定义了一个容器。
+10 spec:
+11   # 声明副本数量是2，代表了RC会启动两个相同的Pod。
+12   replicas: 2
+13   # 选择器。
+14   selector:
+15     app: myweb
+16   # Pod的启动模板，和Pod的yaml配置信息基本差不多的，几乎一样，但是这里没有名称，是因为两个Pod名称不能完全一样的。
+17   # 没有指定名称，RC会随机生成一个名称。
+18   template:
+19     # 资源叫什么名字，是在其属性metadata里面的。但是这里让RC随机生成指定数量的名称。
+20     metadata:
+21       # 给Pod贴上了一个标签，标签是app: web，标签是有一定的作用的。
+22       labels:
+23         app: myweb
+24     # spec是详细，详细里面定义了一个容器。
+25     spec:
+26       # 定义一个容器，可以声明多个容器的。
+27       containers:
+28         # 容器的名称叫做myweb
+29         - name: myweb
+30         # 使用了什么镜像，可以使用官方公有的，也可以使用私有的。
+31           image: 192.168.110.133:5000/nginx:1.13
+32         # ports定义容器的端口。
+33           ports:
+34         # 容器的端口是80，如果容器有多个端口，可以在后面接着写一行即可。
+35             - containerPort: 80
+```
+
+```shell
 apiVersion: v1
 kind: ReplicationController
 metadata:
@@ -171,3 +209,39 @@ kubectl set image deployment/we nginx=nginx:latest --recursive=true
 kubectl patch deployments.apps we --type=json -p='[{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"nginx:zxh"}]'
 ```
 
+```shell
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: we
+  annotations:
+    kubernets.io/change-cause: "Image update to nginx:1.22"
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 35%
+      maxUnavailable: 35%
+    type: Recreate
+  revisionHistoryLimit: 10
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.24
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+```
+
+
+滚动更新失败的原因：
+Quota 不足
+Readiness Probe 失败
+image pull 失败 ^a59729

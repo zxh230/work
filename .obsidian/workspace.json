@@ -1,0 +1,165 @@
+{
+  "main": {
+    "id": "ced52d4b22d534e0",
+    "type": "split",
+    "children": [
+      {
+        "id": "c77c86d96e6ed3ef",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a12cef68b8b4a6d6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "笔记/7_15实验报告.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4cc60095711cc1bc",
+    "type": "split",
+    "children": [
+      {
+        "id": "225a582f3d9467a6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "04602f441eba8d12",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f5c9a2cce64832bf",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "beb2ccb3167f6db4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1f3693971814bcab",
+    "type": "split",
+    "children": [
+      {
+        "id": "baf95209f6965375",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cdf87e3383a7125c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "笔记/7_15实验报告.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "2af666d1343c61c5",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "笔记/7_15实验报告.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "3f2575469875101f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c26d7f41b5e47550",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "笔记/7_15实验报告.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "pkmer:Open Pkmer Market": false
+    }
+  },
+  "active": "a12cef68b8b4a6d6",
+  "lastOpenFiles": [
+    "笔记/4.1笔记.md",
+    "笔记/构建nginx镜像.md",
+    "笔记/检查健康的三种探针.md",
+    "笔记/初始化容器.md",
+    "笔记/7-22作业.md",
+    "笔记/7_26作业.md",
+    "笔记/7_25作业.md",
+    "笔记/7_17考试题.md",
+    "笔记/7_15实验报告.md",
+    "笔记/4.3.md",
+    "笔记/4_26.md",
+    "README.md"
+  ]
+}
