@@ -98,4 +98,19 @@ spec:
         ports:
         - name: web
           containerPort: 80
+# Service：---
+# apiVersion: v1: 指定 Kubernetes API 的版本为 v1。
+# kind: Service: 定义这个 YAML 文件描述的是一个 Kubernetes Service。
+# metadata: 指定 Service 的元数据，包括名称 `nginx` 和标签 app: nginx
+# spec: 指定 Service 的规格：
+# ports: 定义了 Service 监听的端口。在这里，监听的端口为 80，命名为 web
+# clusterIP: None: 将 Service 的 clusterIP 设置为 None，这意味着这个 Service 不会有 Cluster IP 地址，通常用于 Headless Service。
+# selector 指定了 Service 如何选择匹配的 Pod。这里选择标签为 app: nginx 的 Pod
+# StatefulSet：---
+# podManagementPolicy: Parallel`**: 指定了 Pod 的管理策略为并行管理，即可以并行创建或删除 Pod。
+# updateStrategy: 指定了更新策略为滚动更新 (`RollingUpdate`)，确保在更新时保持应用的高可用性。
+# serviceName: "nginx": 指定了 Service 的名称为 nginx，这个 Service 用于提供给 StatefulSet 中的 Pods 使用。
+# replicas: 10: 指定了 StatefulSet 中的 Pod 数量为 10 个，即会创建 10 个副本的 Pods
+# selector: 指定了如何选择匹配的 Pods。这里选择标签为 app: nginx` 的 Pods
+# template: 定义了 StatefulSet 中的 Pod 模板，包括 Pod 的标签和规格
 ```
