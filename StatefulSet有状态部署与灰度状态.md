@@ -50,3 +50,10 @@ spec:
 # Service：创建一个名为 nginx 的 Headless 服务，监听端口 80，并选择标签为 app: nginx 的 Pods
 # StatefulSet：创建一个名为 web 的 StatefulSet，运行 6 个副本的 nginx 容器。每个 Pod 都会使用 nginx 服务进行网络标识
 ```
+调整副本数量==
+```shell
+# 扩展
+kubectl scale statefulset web --replicas 10
+# 缩小
+kubectl scale statefulset web --replicas 3
+```
