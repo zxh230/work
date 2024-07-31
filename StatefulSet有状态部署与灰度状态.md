@@ -43,5 +43,10 @@ spec:
 # 定义了 Service 监听的端口是 80
 # clusterIP: None：指定 Service 为 Headless 服务。Headless 服务不分配集群 IP，通常用于与 StatefulSet 配合使用时，以便每个 Pod 都可以被独立访问
 # app: nginx：选择标签为 app: nginx 的 Pods，这些 Pods 将会接收发送到这个 Service的流量
-# 
+# StatefulSet：---
+# serviceName: "nginx"：指定与这个 StatefulSet 关联的 `ervice 名字为 nginx
+# minReadySeconds: 5：指定 Pod 在被视为 Ready 状态之前，必须至少等待 5 秒
+# ------
+# Service：创建一个名为 nginx 的 Headless 服务，监听端口 80，并选择标签为 app: nginx 的 Pods
+# StatefulSet：创建一个名为 web 的 StatefulSet，运行 6 个副本的 nginx 容器。每个 Pod 都会使用 nginx 服务进行网络标识
 ```
