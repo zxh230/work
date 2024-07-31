@@ -79,3 +79,35 @@ spec:
 # ---
 # 每分钟创建一个新的 Job，Pod 运行一个简单的命令，输出"hello hansir, hi k8s1"，如果任务失败，Pod 会自动重启
 ```
+
+```shell
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: job
+spec:
+  timeZone: Asia/Shanghai
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  startingDeadlineSeconds: 120
+  concurrencyPolicy: Allow
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: job
+            image: busybox:1.36
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - echo "hello hansir, hi k8s1"
+# timeZone: Asia/Shanghai：执行时间会按照上海时区进行。
+# successfulJobsHistoryLimit: 3：保留最近 3 个成功的作业记录。
+# ailedJobsHistoryLimit: 3：保留最近 3 个失败的作业记录。
+# startingDeadlineSeconds: 120：如果作业在设定的计划时间内没有开始执行，允许最多延迟 120 秒。
+# concurrencyPolicy: Allow：允许同时运行多个作业实例（即允许重叠）
+```
