@@ -40,5 +40,7 @@ spec:
         - name: web
           containerPort: 80
 # Service:---
-# 定义了 Service 监听的端口是 80，
+# 定义了 Service 监听的端口是 80
+# clusterIP: None：指定 Service 为 Headless 服务。Headless 服务不分配集群 IP，通常用于与 StatefulSet 配合使用时，以便每个 Pod 都可以被独立访问
+# 
 ```
