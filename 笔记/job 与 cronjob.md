@@ -111,3 +111,22 @@ spec:
 # startingDeadlineSeconds: 120：如果作业在设定的计划时间内没有开始执行，允许最多延迟 120 秒。
 # concurrencyPolicy: Allow：允许同时运行多个作业实例（即允许重叠）
 ```
+### 挂起
+```shell
+# 查看任务
+kubectl get cronjobs.batch
+```
+![](https://gitee.com/zhaojiedong/img/raw/master/202407310956135.png)
+==SUSPEND状态为 false 为未挂起任务==
+```shell
+# 挂起该任务
+kubectl edit cronjobs.batch
+```
+![](https://gitee.com/zhaojiedong/img/raw/master/202407310958200.png)
+更改为 true
+```shell
+# 再次查看
+kubectl get cronjobs.batch
+```
+![](https://gitee.com/zhaojiedong/img/raw/master/202407310959502.png)
+*任务被挂起*
