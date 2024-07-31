@@ -42,5 +42,6 @@ spec:
 # Service:---
 # 定义了 Service 监听的端口是 80
 # clusterIP: None：指定 Service 为 Headless 服务。Headless 服务不分配集群 IP，通常用于与 StatefulSet 配合使用时，以便每个 Pod 都可以被独立访问
+# app: nginx：选择标签为 app: nginx 的 Pods，这些 Pods 将会接收发送到这个 Service的流量
 # 
 ```
