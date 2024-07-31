@@ -7,7 +7,17 @@
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447744.png)
 
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447963.png)
-vim编辑器用法：
-D 删除当前行内光标后的内容
-: noh  取消搜索高亮
-搜索后 n 查找下一个
+>vim编辑器用法：
+>D 删除当前行内光标后的内容
+>: noh  取消搜索高亮
+>搜索后 n 查找下一个
+##### 下载镜像
+```shell
+# kube01
+nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/controller:
+nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-webhook-certgen:v1.4.1
+# kube02
+nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-webhook-certgen:v1.4.1
+# kube03
+nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-webhook-certgen:v1.4.1
+```
