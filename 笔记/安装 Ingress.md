@@ -25,3 +25,4 @@ nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-we
 ```shell
 vim deploy.yaml
 ```
+
