@@ -48,12 +48,15 @@ cat deploy.yaml |grep -E "hostNetwork|nodeName|image: registry.cn-hangzhou.aliyu
 kube01 <br />
 
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311519178.png)
+
 kube02 <br />
 
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311520031.png)
+
 kube03 <br />
 
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311521183.png)
+
 配置文件 <br />
 
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311521079.png)
