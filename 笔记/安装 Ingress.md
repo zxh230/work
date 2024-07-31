@@ -14,10 +14,14 @@
 ##### 下载镜像
 ```shell
 # kube01
-nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/controller:
+nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/controller:v1.10.1
 nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-webhook-certgen:v1.4.1
 # kube02
 nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-webhook-certgen:v1.4.1
 # kube03
 nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-webhook-certgen:v1.4.1
+```
+##### 修改deploy.yaml文件
+```shell
+vim deploy.yaml
 ```
