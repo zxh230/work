@@ -30,6 +30,17 @@ nodeName: kube01
 # 注：主机名为下载了 controller:v1.10.1 镜像的主机
 ```
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311503183.png)
+##### 验证*
+```shell
+# 验证kube01镜像是否安装
+nerdctl images --namespace k8s.io |grep -E "controller|webhook"
+# 验证kube02镜像是否安装
+nerdctl images --namespace k8s.io |grep -E "webhook"
+# 验证kube03镜像是否安装
+nerdctl images --namespace k8s.io |grep -E "webhook"
+# 查看文件中镜像是否与安装镜像名一致
+
+```
 ##### 修改完成后开始部署
 ```shell
 kubectl apply -f deploy.yaml
