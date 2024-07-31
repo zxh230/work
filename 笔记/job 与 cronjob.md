@@ -1,5 +1,5 @@
 
-
+编写一次性任务 job
 ```shell
 apiVersion: batch/v1
 kind: Job
@@ -19,5 +19,9 @@ spec:
           - echo "zxh"
 # kind: job  指代该任务为一次性任务
 # restartPolicy: Never: 指定 Pod 的重启策略为 Never，意味着一旦容器完成（无论成功或失败），都不会重启
-# 
+```
+
+
+```shell
+
 ```
