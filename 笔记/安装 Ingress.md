@@ -38,8 +38,8 @@ nerdctl images --namespace k8s.io |grep -E "controller|webhook"
 nerdctl images --namespace k8s.io |grep -E "webhook"
 # 验证kube03镜像是否安装
 nerdctl images --namespace k8s.io |grep -E "webhook"
-# 查看文件中镜像是否与安装镜像名一致
-
+# 查看文件中镜像是否与安装镜像名一致，主机配置是否正确，此命令无需更改
+cat deploy.yaml |grep "image: registry.cn-hangzhou.aliyuncs.com"
 ```
 ##### 修改完成后开始部署
 ```shell
