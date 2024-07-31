@@ -23,6 +23,15 @@ nerdctl --namespace k8s.io pull registry.cn-hangzhou.aliyuncs.com/zxh230/kube-we
 ```
 ##### 修改deploy.yaml文件
 ```shell
-vim deploy.yaml
+vim deploy.yaml +423
+# 添加
+hostNetwork: true
+nodeName: kube01
+# 注：主机名为下载了 controller:v1.10.1 镜像的主机
 ```
-
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311503183.png)
+##### 修改完成后开始部署
+```shell
+kubectl apply -f deploy.yaml
+```
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311505895.png '部署完成')
