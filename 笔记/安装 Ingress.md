@@ -1,15 +1,13 @@
 下载部署文件
-[deploy.yaml](https://gitee.com/zhaojiedong/work/blob/master/%E6%96%87%E4%BB%B6/deploy.yaml)
-修改部署文件
+[deploy.yaml](https://gitee.com/zhaojiedong/work/blob/master/%E6%96%87%E4%BB%B6/deploy.yaml) <br />
+修改部署文件<br />
 ==修改文件中第449，550，603行的镜像地址为自己阿里云私人仓库的地址==
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447118.png)
-
  ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447744.png)
-
  ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447963.png)
->vim编辑器用法：
->D 删除当前行内光标后的内容
->: noh  取消搜索高亮
+>vim编辑器用法：<br />
+>D 删除当前行内光标后的内容 <br />
+>: noh  取消搜索高亮 <br />
 >搜索后 n 查找下一个
 ##### 下载镜像
 ```shell
@@ -41,15 +39,15 @@ nerdctl images --namespace k8s.io |grep -E "webhook"
 # 查看文件中镜像是否与安装镜像名一致，主机配置是否正确，此命令无需更改
 cat deploy.yaml |grep -E "hostNetwork|nodeName|image: registry.cn-hangzhou.aliyuncs.com"
 ```
-kube01
+kube01 <br />
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311519178.png)
-kube02
+kube02 <br />
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311520031.png)
-kube03
+kube03 <br />
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311521183.png)
-配置文件
+配置文件 <br />
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311521079.png)
-==注意主机名是否正确==
+==注意主机名是否正确== 
 ##### 修改完成后开始部署
 ```shell
 kubectl apply -f deploy.yaml
@@ -60,5 +58,5 @@ kubectl apply -f deploy.yaml
 # 稍稍等待
 kubectl get pods -n ingress-nginx
 ```
-![](https://gitee.com/zhaojiedong/img/raw/master/202407311524756.png)
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311524756.png) <br />
 安装完成，Completed为容器已完成状态，没有报错
