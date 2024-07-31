@@ -55,3 +55,10 @@ kube03
 kubectl apply -f deploy.yaml
 ```
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311505895.png '部署完成')
+验证：
+```shell
+# 稍稍等待
+kubectl get pods -n ingress-nginx
+```
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311524756.png)
+安装完成，Completed为容器已完成状态，没有报错
