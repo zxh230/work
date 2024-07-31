@@ -40,5 +40,5 @@ spec:
         - name: web
           containerPort: 80
 # Service:---
-# 
+# 定义了 Service 监听的端口是 80，
 ```
