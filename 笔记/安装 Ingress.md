@@ -41,7 +41,15 @@ nerdctl images --namespace k8s.io |grep -E "webhook"
 # 查看文件中镜像是否与安装镜像名一致，主机配置是否正确，此命令无需更改
 cat deploy.yaml |grep -E "hostNetwork|nodeName|image: registry.cn-hangzhou.aliyuncs.com"
 ```
-
+kube01
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311519178.png)
+kube02
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311520031.png)
+kube03
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311521183.png)
+配置文件
+![](https://gitee.com/zhaojiedong/img/raw/master/202407311521079.png)
+==注意主机名是否正确==
 ##### 修改完成后开始部署
 ```shell
 kubectl apply -f deploy.yaml
