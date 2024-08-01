@@ -463,3 +463,89 @@ ipvsadm -Ln
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012203956.png)
 
+配置ingress
+```shell
+# 在kube02，kube03上创建网页文件
+# kube02
+mkdir -p /www/httpd
+mkdir -p /www/nginx
+echo "http by kube02" > /www/httpd/index.html
+echo "nginx by kube02" > /www/nginx/index.html
+# kube03
+systemctl stop httpd
+mkdir -p /www/httpd
+mkdir -p /www/nginx
+echo "http by kube03" > /www/httpd/index.html
+echo "nginx by kube03" > /www/nginx/index.html
+# 创建部署文件
+vim nginx.yaml
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-cluster
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.24
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html/
+      volumes:
+      - name: www
+        hostPath:
+          path: /www/nginx/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+###
+vim single.yaml
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: single-ingress
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: nginx
+      port:
+        number: 80
+###
+# 部署后查看
+kubectl infopod 
+kubectl get svc
+kubectl get ingress
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012233351.png)
+
+访问service IP地址，轮询访问
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012237963.png)
+
+
+访问部署了 ingress 节点的IP地址，轮询访问
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012237112.png)
