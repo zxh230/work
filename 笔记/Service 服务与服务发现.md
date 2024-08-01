@@ -19,3 +19,7 @@ spec:
 查看service代理的所有IP地址
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311131397.png)
 
+```shell
+# 查看pod的dns策略
+kubectl explain pod.spec.dnsPolicy
+```
