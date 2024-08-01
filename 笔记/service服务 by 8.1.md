@@ -201,3 +201,25 @@ spec:
 # 访问百度
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011826629.png)
+
+~~~shell
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+spec:
+  sessionAffinity: ClientIP
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  selector:
+    app: nginx
+# sessionAffinity: ClientIP 当设置essionAffinity: ClientIP时，来自同一客户端 IP 地址的所有请求都会被路由到同一个 Pod
+~~~
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011838846.png)
+
+可以访问nginx
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011839141.png)
+
