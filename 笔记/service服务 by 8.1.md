@@ -282,3 +282,80 @@ spec:
 kubectl get svc -owide
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011854282.png)
+
+进行访问
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011944169.png)
+
+
+设置虚拟IP
+```shell
+vim nginx-svc.yaml
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+spec:
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  selector:
+    app: nginx
+  externalIPs:
+  - 10.15.200.241
+  - 10.15.200.200
+# 虚拟IP可以在物理机上进行访问，但是无法在浏览器上访问
+```
+
+```shell
+# 在kube03上安装httpd，启动并生成网页文件
+yum -yq install httpd
+systemctl start httpd
+echo "Im httpd from kube03" > /var/www/html/index.html
+curl 10.15.200.243
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011949243.png)
+
+```shell
+vim ex-svc.yaml
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: my-service
+subsets:
+- addresses:
+  - ip: 10.15.200.243
+  ports: 
+  - port: 80
+###
+# 部署后查看
+kubectl get svc
+kubectl describe svc my-service
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011954460.png)
+
+访问service IP时可以代理到后端节点
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011955255.png)
+
+同时，在容器中也能够进行访问
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011956394.png)
+
+
+```shell
+
+```
