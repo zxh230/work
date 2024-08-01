@@ -2,6 +2,7 @@
 内容为`kube-system`空间中的service IP地址
 ⚠️upload failed, check dev console
 
+
 ```shell
 # nginx.yaml 文件内容
 apiVersion: apps/v1
