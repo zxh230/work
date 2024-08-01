@@ -356,6 +356,110 @@ kubectl describe svc my-service
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011956394.png)
 
 
-```shell
+使用主机名+service访问
 
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012137050.png)
+
+```shell
+vim nginx-svc.yaml
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+spec:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  selector:
+    app: nginx
+###
+# 查看
+kubectl get svc
 ```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012138910.png)
+
+可以通过任意节点IP+端口访问后端pod
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012140997.png)
+
+```shell
+vim /etc/kubernetes/manifests/kube-apiserver.yaml 
+# 增加之前删除service
+- --service-node-port-range=40000-50000
+# 重启
+# 再次部署service，端口号范围变化
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012144589.png)
+
+也可以指定端口号（同一范围）
+```shell
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+spec:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8080
+    nodePort: 40080
+    targetPort: 80
+  selector:
+    app: nginx
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012146390.png)
+
+验证仍然可以访问
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012147326.png)
+
+开启ip_vs (三个节点全部开启)
+```shell
+modprobe -- ip_vs_sh
+modprobe -- ip_vs_rr
+modprobe -- ip_vs_wrr
+# 验证
+lsmod |grep ip_vs
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012152049.png)
+
+```shell
+# 安装ipset,ipvsadm
+yum -yq install ipset ipvsadm
+# 修改配置
+kubectl edit configmaps --namespace kube-system kube-proxy
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012155553.png)
+
+```shell
+# 查看
+kubectl get daemonsets.apps -n kube-system 
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012158986.png)
+
+重启kube-proxy
+```shell
+kubectl rollout restart daemonset -n kube-system kube-proxy 
+```
+
+查看轮询记录
+```shell
+ipvsadm -Ln
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012200348.png)
+
+保存iptables中关于serviceIP地址的条目
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012201772.png)
+
+轮询条目
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012203955.png)
+
+查看pod IP地址是否与轮询地址对应
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012203956.png)
+
