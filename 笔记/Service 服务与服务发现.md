@@ -41,3 +41,19 @@ vim /etc/kubernetes/manifests/kube-apiserver.yaml
 systemctl daemon-reload 
 systemctl restart kubelet.service
 ```
+```shell
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+spec:
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  selector:
+    app: nginx
+  externalIPs:
+  - 10.15.200.110
+# externalIPs 列出了Service可以绑定的外部IP地址
+```
