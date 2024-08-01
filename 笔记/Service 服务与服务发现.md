@@ -23,3 +23,9 @@ spec:
 # 查看pod的dns策略
 kubectl explain pod.spec.dnsPolicy
 ```
+```shell
+hostNetwork: true
+dnsPolicy: ClusterFirstWithHostNet
+# hostNetwork: true 使用节点网络
+# dnsPolicy: ClusterFirstWithHostNet 即使Pod在宿主机网络中运行，Kubernetes集群DNS解析仍然优先
+```
