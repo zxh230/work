@@ -111,5 +111,70 @@ curl ns-svc.test:8080
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011725521.png)
 ```shell
-
+vim domainame.yaml 
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-subdomain
+spec:
+  selector:
+    name: busybox
+  clusterIP: None
+  ports:
+  - name: foo
+    port: 1234
+    targetPort: 1234
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: box1
+  labels:
+    name: busybox
+spec:
+  hostname: busybox-1
+  containers:
+  - name: test1
+    image: rockylinux:9
+    imagePullPolicy: IfNotPresent
+    command:
+    - sleep
+    - 1d
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: box2
+  labels:
+    name: busybox
+spec:
+  hostname: busybox-2
+  containers:
+  - name: test2
+    image: rockylinux:9
+    imagePullPolicy: IfNotPresent
+    command:
+    - sleep
+    - 1d
+###
 ```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011750039.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011750563.png)
+
+```shell
+kubectl exec -it box1 -- bash
+dnf install -yq bind-utils
+nslookup 
+# 进行解析
+cat /etc/resolv.conf
+nslookup default-subdomain
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011752022.png)
+
+此时无法解析主机名
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011754362.png)
+
