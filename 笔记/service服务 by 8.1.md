@@ -1,7 +1,6 @@
 当任意pod被部署时，在其内的容器的`/etc/resolv.conf`会写入新的dns
 内容为`kube-system`空间中的service IP地址
-⚠️upload failed, check dev console
-
+![[Pasted image 20240801165525.png]]
 
 ```shell
 # nginx.yaml 文件内容
@@ -30,7 +29,7 @@ spec:
 
 该IP地址指向 kube-system 空间内的两个pod
 
-![[Pasted image 20240801163429.png]]
+![[Pasted image 20240801165439.png]]
 
 在 pod 中通过挂载实现 dns 解析
 ```shell
@@ -41,4 +40,9 @@ crictl ps
 # 查看相应容器的信息
 crictl inspect <pod ID>
 ```
-![[Pasted image 20240801164223.png]]
+![[Pasted image 20240801165610.png]]
+```shell
+# 查看挂载内容
+cat <挂载路径>
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011703471.png)
