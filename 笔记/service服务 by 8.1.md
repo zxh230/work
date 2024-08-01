@@ -223,3 +223,62 @@ spec:
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011839141.png)
 
+修改cluster IP地址池范围
+
+```shell
+vim /etc/kubernetes/manifests/kube-apiserver.yaml 
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011845410.png)
+
+```shell
+# 重启
+systemctl daemon-reload 
+systemctl restart kubelet.service
+# 修改文件
+vim nginx-svc.yaml
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+spec:
+  clusterIP: 10.10.100.100
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  selector:
+    app: nginx
+###
+# 此时可以成功部署
+```
+当改为10.100.100.100时也可以成功部署
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011850339.png)
+
+可以正常访问后端pod
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011851111.png)
+
+指定后端节点IP
+```shell
+vim nginx-svc.yaml
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+spec:
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  selector:
+    app: nginx
+  externalIPs:
+  - 10.15.200.241
+###
+# 部署后查看
+kubectl get svc -owide
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011854282.png)
