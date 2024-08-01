@@ -57,3 +57,12 @@ spec:
   - 10.15.200.110
 # externalIPs 列出了Service可以绑定的外部IP地址
 ```
+```shell
+modprobe -- ip_vs
+modprobe -- ip_vs_sh
+modprobe -- ip_vs_rr
+modprobe -- ip_vs_wrr
+yum -yq install ipset ipvsadm
+kubectl rollout restart daemonset --namespace kube-system kube-proxy
+
+```
