@@ -178,3 +178,14 @@ nslookup default-subdomain
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011754362.png)
 
+```shell
+spec:
+  hostname: busybox-2
+  setHostnameAsFQDN: true
+# hostname: busybox-2 指定hostname主机名
+# setHostnameAsFQDN: true 使得在pod内查询hostname时输出完整的FQDN主机名
+spec:
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+# dnsPolicy: ClusterFirstWithHostNet 可以使用节点上的dns进行解析
+```
