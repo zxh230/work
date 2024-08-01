@@ -189,3 +189,15 @@ spec:
   dnsPolicy: ClusterFirstWithHostNet
 # dnsPolicy: ClusterFirstWithHostNet 可以使用节点上的dns进行解析
 ```
+```shell
+# 指定pod内的dns
+spec:
+  dnsPolicy: None
+  dnsConfig:
+    nameservers:
+    - 114.114.114.114
+    - 8.8.8.8
+# 部署完成后进入pod查看
+# 访问百度
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408011826629.png)
