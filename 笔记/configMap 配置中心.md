@@ -187,3 +187,43 @@ spec:
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021111610.png)
 
+挂载时区文件
+```shell
+[root@kube01 configmap]# cat pod.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: box1
+  labels:
+    app: guestbook
+spec:
+  containers:
+  - name: test1
+    image: nginx:1.24
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: box2
+  labels:
+    app: test
+spec:
+  containers:
+  - name: test2
+    image: nginx:1.24
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: timezone
+      mountPath: /etc/localtime
+      subPath: Shanghai
+  volumes:
+  - name: timezone
+    configMap:
+      name: tzshanghai
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021141375.png)
