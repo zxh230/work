@@ -227,3 +227,18 @@ spec:
       name: tzshanghai
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021141375.png)
+
+创建加密数据
+```shell
+kubectl create secret generic mysecret --from-literal username=admin --from-literal password=123.com
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021152545.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021152046.png)
+
+解密
+```shell
+echo MTIzLmNvbQ== |base64 --decode
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021152450.png)
+
