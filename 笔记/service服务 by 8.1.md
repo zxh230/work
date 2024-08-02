@@ -551,3 +551,136 @@ kubectl get ingress
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012237112.png)
 ******
 多主机配置
+
+新建service
+
+```shell
+vim httpd.yaml
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: httpd-cluster
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: httpd
+          mountPath: /usr/local/apache2/htdocs/
+      volumes:
+      - name: httpd
+        hostPath:
+          path: /www/httpd/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpd
+spec:
+  selector:
+    app: httpd
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+###
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408020854604.png)
+
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408020853870.png)
+
+
+配置 ingress
+
+```shell
+vim domain.yaml
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "nginx.zxh.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+  - host: "httpd.zxh.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: httpd
+            port:
+              number: 80
+# 指向创建好的两个service
+###
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408020856739.png)
+
+修改域名解析文件
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408020858670.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408020858978.png)
+
+创建新的网页
+```shell
+mkdir /www/nginx/prod
+mkdir /www/httpd/test
+echo "httpd test" > /www/httpd/test/index.html
+echo "nginx prod" > /www/nginx/prod/index.html
+# 更改domain.yaml
+cp domain.yaml url.yaml
+vim url.yaml
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "nginx.zxh.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /prod
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+      paths:
+      - pathType: Prefix
+        path: /test
+        backend:
+          service:
+            name: httpd
+            port:
+              number: 80
+###
+```
