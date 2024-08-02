@@ -100,4 +100,10 @@ spec:
               name: tomcat-config
               key: tomcat_port
 ###
+# 部署后查看变量
+
 ```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021050541.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021050929.png)
+
