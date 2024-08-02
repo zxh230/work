@@ -36,3 +36,68 @@ kubectl describe configmaps dir
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021011924.png)
 
+通过yaml文件创建configmap
+
+```shell
+vim mysql-conf.yaml 
+###
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-conf
+  labels:
+    app: mysql
+data:
+  master.cnf: |
+    [mysql]
+    log_bin
+    log_bin_trust
+    mysql_name=mysql-a
+  slave.cnf: |
+    [mysql]
+    super_read_only
+    log_bin_trust_function_creators=1
+###
+# 部署后查看
+kubectl describe configmaps mysql-conf
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021018904.png)
+
+```shell
+vim nginx.yaml
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.24
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: test_env
+          value: testenv
+        - name: server_name
+          valueFrom:
+            configMapKeyRef:
+              name: tomcat-config
+              key: server_name
+        - name: server_port
+          valueFrom:
+            configMapKeyRef:
+              name: tomcat-config
+              key: tomcat_port
+###
+```
