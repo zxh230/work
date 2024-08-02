@@ -549,3 +549,5 @@ kubectl get ingress
 访问部署了 ingress 节点的IP地址，轮询访问
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408012237112.png)
+******
+多主机配置
