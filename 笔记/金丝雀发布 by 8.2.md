@@ -9,6 +9,21 @@ service的端口号为：9090。
 > 开始编写
 
 ```shell
+# 作业目录
+mkdir jsq
+cd jsq/
+# 创建证书与密钥
+mkdir certs/
+cd certs/
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout ./a.key -x509 -days 3650 -out ./a.cert -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/CN=mydomain.com";
+# 创建secret
+kubectl create secret generic zxh-tls --from-file=tls.crt=./a.crt --from-file=tls.key=./a.key --type=kubernetes.io/tls
+# 查看secret
+kubectl get secret zxh-tls -o yaml
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021824622.png)
+
+```shell
 # 编写new.yaml
 vim new.yaml
 ###
