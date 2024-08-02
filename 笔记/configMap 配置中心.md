@@ -107,3 +107,41 @@ spec:
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021050929.png)
 
+将configMap挂载到pod内（热更新）
+
+```shell
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.24
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: test_env
+          value: testenv
+        volumeMounts:
+        - name: nginxconfig
+          mountPath: /tmp/config
+      volumes:
+      - name: nginxconfig
+        configMap:
+          name: cmfromdir
+# 进入pod查看
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408021101352.png)
+
