@@ -684,3 +684,196 @@ spec:
               number: 80
 ###
 ```
+
+多主机
+```shell
+vim url.yaml
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "nginx.zxh.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /prod
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+      - pathType: Prefix
+        path: /test
+        backend:
+          service:
+            name: httpd
+            port:
+              number: 80
+###
+```
+
+重定向网页
+```shell
+# 重定向
+vim rewrite.yaml
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rewrite
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: https://www.baidu.com
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "nginx.zxh.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+###
+```
+
+新旧发布（金丝雀发布）
+```shell
+vim new.yaml 
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: new-nginx
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "vip"
+    nginx.ingress.kubernetes.io/canary-by-header-volue: "10"
+spec:
+  ingressClassName: new-nginx
+  rules:
+    - host: "www.zxh.com"
+      http:
+        paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: new-nginx
+              port:
+                number: 80
+###
+vim old.yaml
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: old-nginx
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "www.zxh.com"
+      http:
+        paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: nginx
+              port:
+                number: 80
+###
+```
+```shell
+vim nginx-old.yaml
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-cluster
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.24
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html/
+      volumes:
+      - name: www
+        hostPath:
+          path: /www/old/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+###
+vim nginx-new.yaml
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-cluster
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.24
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html/
+      volumes:
+      - name: www
+        hostPath:
+          path: /www/new/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: new-nginx
+spec:
+  selector:
+    app: new-nginx
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+###
+```
+******
