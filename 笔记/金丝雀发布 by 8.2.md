@@ -36,4 +36,13 @@ vim new.yaml
 ```shell
 # 域名可以更改
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls.crt -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/CN=www.zxh.com"
+# 创建secret
+kubectl create secret generic zxh-tls --from-file=tls.crt=./tls.crt --from-file=tls.key=./tls.key --type=kubernetes.io/tls
+# 验证
+kubectl get secrets zxh-tls -o yaml
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031215997.png)
+
+```shell
+
 ```
