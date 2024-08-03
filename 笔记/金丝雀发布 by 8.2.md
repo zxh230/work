@@ -112,11 +112,29 @@ spec:
         hostPath:
           path: /nginx
           type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: nginx
+    port: 443
+    targetPort: 443
 ###
 # 部署后验证
+# 访问容器ip
 curl -k --key tls.key https://10.108.41.42/canary/new/
+# 访问svcIP
+curl -k --key tls.key https://10.100.163.203/canary/new/
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031250515.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031300277.png)
+
 
 ```shell
 
