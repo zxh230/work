@@ -44,5 +44,80 @@ kubectl get secrets zxh-tls -o yaml
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031215997.png)
 
 ```shell
+# 在kube02,kube03上创建网页目录与文件
+mkdir -p /nginx/canary/new
+mkdir -p /nginx/stable/old
+echo zxh > /nginx/stable/old/index.html
+echo hansir > /nginx/canary/new/index.html
+# 编写nginx.yaml
+vim nginx.yaml
+###
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    server {
+        listen 443 ssl;
+        server_name localhost;
+
+        ssl_certificate /etc/nginx/ssl/tls.crt;
+        ssl_certificate_key /etc/nginx/ssl/tls.key;
+        ssl_verify_client off;
+
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 443
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/ssl.conf
+          subPath: nginx.conf
+        - name: zxh-tls
+          mountPath: /etc/nginx/ssl
+          readOnly: true
+        - name: nginx-web
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+      - name: zxh-tls
+        secret:
+          secretName: zxh-tls
+      - name: nginx-web
+        hostPath:
+          path: /nginx
+          type: Directory
+###
+# 部署后验证
+curl -k --key tls.key https://10.108.41.42/canary/new/
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031250515.png)
+
+```shell
 
 ```
