@@ -30,3 +30,10 @@ vim new.yaml
 
 ###
 ```
+
+******
+生成密钥
+```shell
+# 域名可以更改
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls.crt -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/CN=www.zxh.com"
+```
