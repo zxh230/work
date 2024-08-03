@@ -10,7 +10,7 @@ service的端口号为：9090。
 
 生成密钥
 ```shell
-# 域名可以更改
+# 域名更改之后对应部署的域名也需要更改
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls.crt -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/CN=www.zxh.com"
 # 创建secret
 kubectl create secret generic zxh-tls --from-file=tls.crt=./tls.crt --from-file=tls.key=./tls.key --type=kubernetes.io/tls
@@ -184,11 +184,45 @@ kubectl apply -f conf.yaml
 kubeclt apply -f nginx.yaml
 kubectl apply -f ingress.yaml
 ```
-
-部署后验证：
+写入域名解析
 ```shell
-# curl 访问
-curl https://www.zxh.com/canary/new/
-curl https://www.zxh.com/stable/old/
+# 查看ingress部署节点
+kubectl get pod -n ingress-nginx -owide
 ```
-![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031747653.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408032003858.png)
+```shell
+vim /etc/hosts
+### IP与上面的对应
+10.15.200.241 www.zxh.com
+10.15.200.241 zxh.com
+###
+```
+
+查看状态：
+```shell
+kubectl get pod
+kubectl get svc
+kubectl get ingress
+kubectl get configmaps
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031958188.png)
+
+
+验证：
+```shell
+curl https://www.zxh.com/canary/old/
+curl -L https://www.zxh.com/canary/old/
+curl -L https://www.zxh.com/stable/old/
+curl -L https://www.zxh.com/canary/new/
+curl -L https://www.zxh.com/stable/old/
+curl -L www.zxh.com/stable/old/
+curl -L www.zxh.com
+curl -L zxh.com/canary/new/
+curl -L zxh.com/stable/old/
+curl -L -H"vip:user" zxh.com
+curl -L -H"vip:user" www.zxh.com
+curl -L -H"vip:user" https://www.zxh.com
+curl -L -H"vip:user" zxh.com
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031955549.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031956070.png)
