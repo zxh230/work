@@ -139,3 +139,159 @@ curl -k --key tls.key https://10.100.163.203/canary/new/
 ```shell
 
 ```
+
+
+******
+由于要求难以共存，实验分为三个版本
+第一个版本：使用头部访问
+第二个版本：使用路径访问
+第三个版本：共存版本
+
+
+
+
+前提：
+生成密钥
+```shell
+# 域名可以更改
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls.crt -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/CN=www.zxh.com"
+# 创建secret
+kubectl create secret generic zxh-tls --from-file=tls.crt=./tls.crt --from-file=tls.key=./tls.key --type=kubernetes.io/tls
+# 在kube02,kube03上创建网页目录与文件
+mkdir -p /nginx/canary/new
+mkdir -p /nginx/stable/old
+echo zxh > /nginx/stable/old/index.html
+echo hansir > /nginx/canary/new/index.html
+```
+版本一：
+
+
+
+
+版本二：
+```shell
+# 编写nginx.yaml,内含Deployment以及service的部署
+vim nginx.yaml
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: nginx.conf
+        - name: nginx-web
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+      - name: nginx-web
+        hostPath:
+          path: /nginx
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+###
+# 编写conf.yaml,内含nginx配置文件
+vim conf.yaml
+###
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+
+        location /canary/new {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+
+        location /stable/old {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+
+        location / {
+            if ($http_vip = "user") {
+                return 301 /stable/old;
+            }
+            return 301 /canary/new;
+        }
+    }
+###
+# 编写ingress.yaml,内含ingress策略
+vim ingress.yaml
+###
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx  # 新增这一行
+  tls:
+  - hosts:
+    - www.zxh.com
+    secretName: zxh-tls
+  rules:
+  - host: www.zxh.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port: 
+              number: 80
+###
+```
+
+部署顺序：
+
+```shell
+kubectl apply -f conf.yaml
+kubeclt apply -f nginx.yaml
+kubectl apply -f ingress.yaml
+```
+
+部署后验证：
+```shell
+# curl 访问
+curl https://www.zxh.com/canary/new/
+curl https://www.zxh.com/stable/old/
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408031747653.png)
