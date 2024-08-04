@@ -220,8 +220,8 @@ kubectl get configmaps
 验证：
 ```shell
 # 如果仍然提示证书未受信任可以尝试重启物理机
-curl https://www.zxh.com/canary/old/
-curl -L https://www.zxh.com/canary/old/
+curl https://www.zxh.com/canary/new/
+curl -L https://www.zxh.com/canary/new/
 curl -L https://www.zxh.com/stable/old/
 curl -L https://www.zxh.com/canary/new/
 curl -L https://www.zxh.com/stable/old/
