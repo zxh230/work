@@ -18,7 +18,7 @@ service的端口号为：9090
 # 域名更改之后对应部署的域名也需要更改
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls.crt -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/CN=www.zxh.com"
 # 信任证书
-cp ./tls.crt /usr/local/share/ca-certificates/tls.crt
+cp ./tls.crt /etc/pki/ca-trust/source/anchors/tls.crt
 # 更新证书
 update-ca-certificates
 # 创建secret
