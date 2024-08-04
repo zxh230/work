@@ -20,7 +20,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls
 # 信任证书
 cp ./tls.crt /etc/pki/ca-trust/source/anchors/tls.crt
 # 更新证书
-update-ca-certificates
+update-ca-trust extract
 # 创建secret
 kubectl create secret generic zxh-tls --from-file=tls.crt=./tls.crt --from-file=tls.key=./tls.key --type=kubernetes.io/tls
 # 在kube02,kube03上创建网页目录与文件
