@@ -6,7 +6,7 @@ service的端口号为：9090
 使用ingress实现：1、访问域名[name].com，跳转到https://www.[name].com
 
 2、访问域名https://www.[name].com/canary/new：显示：hansir
-啊
+
 3、访问域名https://www.[name].com/stable/old：显示：[name]
 
 其中，[name] 将替换为 `zxh` ,如有需要可自行替换
