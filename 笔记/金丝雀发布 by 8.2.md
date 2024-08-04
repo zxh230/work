@@ -74,7 +74,7 @@ spec:
     app: nginx
   ports:
   - name: http
-    port: 80
+    port: 9090
     targetPort: 80
 ###
 # 编写conf.yaml,内含nginx配置文件
@@ -133,7 +133,7 @@ spec:
           service:
             name: nginx
             port: 
-              number: 80
+              number: 9090
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -157,7 +157,7 @@ spec:
           service:
             name: nginx
             port: 
-              number: 80
+              number: 9090
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -178,7 +178,7 @@ spec:
           service:
             name: nginx
             port:
-              number: 80
+              number: 9090
 ###
 ```
 
