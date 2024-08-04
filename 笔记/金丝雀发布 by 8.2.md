@@ -17,6 +17,10 @@ service的端口号为：9090
 ```shell
 # 域名更改之后对应部署的域名也需要更改
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls.crt -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/CN=www.zxh.com"
+# 信任证书
+cp ./tls.crt /usr/local/share/ca-certificates/tls.crt
+# 更新证书
+update-ca-certificates
 # 创建secret
 kubectl create secret generic zxh-tls --from-file=tls.crt=./tls.crt --from-file=tls.key=./tls.key --type=kubernetes.io/tls
 # 在kube02,kube03上创建网页目录与文件
@@ -215,6 +219,7 @@ kubectl get configmaps
 
 验证：
 ```shell
+# 如果仍然提示证书未受信任可以尝试重启物理机
 curl https://www.zxh.com/canary/old/
 curl -L https://www.zxh.com/canary/old/
 curl -L https://www.zxh.com/stable/old/
