@@ -31,3 +31,6 @@ kubectl get pods -n kube-system
 ******
 # 资源限制与QOS
 
+requests 和 limit 没有设置=BestEffort
+requests 小于 limit=Burstable
+requests 等于 limit=Guaranteed
