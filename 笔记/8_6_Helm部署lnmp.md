@@ -493,4 +493,5 @@ kubectl port-forward --address 0.0.0.0 services/zxh-1722960524-nginxsvc 8080:443
 
 [tgz 包下载](https://gitee.com/zhaojiedong/work/raw/master/%E6%96%87%E4%BB%B6/zxh-0.1.0.tgz)
 
+z
 拷贝到仓库进行后续操作即可，域名无法修改
