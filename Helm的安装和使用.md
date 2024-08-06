@@ -14,6 +14,10 @@ source ~/.bashrc
 helm repo add bitnami https://charts.bitnami.com/bitnami
 # 查看helm仓库
 helm repo list
+# 查找仓库中含有的软件，例：mysql
+helm search repo bitnami |grep mysql
+# 更新软件包
+helm repo update
 # 
 ```
 
