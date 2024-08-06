@@ -120,4 +120,39 @@ helmify -version
 helmify
 chart. yaml：包含 chart 的信息，例如名字，版本，描述等
 templates：包含安装 helm chart 时最终部署的所有清单文件
-valumes：
+valumes：定义模板中的值，例如 replicas image 等等
+
+tips：
+1 helmify 不会覆盖文件，官方故意这么做的（每次修改都需要删除重新装）
+2 helmify 不会删除现有模板文件，只会覆盖（一个目录下只有一个模板）
+3 helmify 的所有变更都从下一次部署开始
+4 注意 labels 标签，如果之前用了，最好重头删除再重新生成
+
+
+helmify 自定义安装
+
+```shell
+# 将之前的nginx.yaml用helmify转写
+cat nginx.yaml|  helmify nginx-zxh
+# 安装
+helm install nginx-zxh --generate-name 
+# 打包
+helm package nginx-zxh
+# 使用tar包安装
+helm install web-zxh nginx-zxh-0.1.0.tgz 
+```
+
+部署私人的 repo 服务器
+
+kube 01:
+```shell
+scp /usr/local/sbin/helm kube02:/usr/local/sbin/helm
+scp /usr/local/sbin/helmify kube02:/usr/local/sbin/helmify
+```
+kube 02:
+
+```shell
+# 安装并启动httpd
+yum -yq install httpd
+systemctl start httpd
+```
