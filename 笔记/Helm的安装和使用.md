@@ -105,3 +105,15 @@ helm create helm-test
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061127021.png)
 
+安装 helmify
+[helmify安装](https://gitee.com/zhaojiedong/work/raw/master/%E6%96%87%E4%BB%B6/helmify_Linux_x86_64.tar.gz)
+
+```shell
+# 解压
+tar -xf helmify_Linux_x86_64.tar.gz
+mv helmify /usr/local/sbin/
+# 验证
+helmify -version
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061138744.png)
+
