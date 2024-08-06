@@ -18,8 +18,22 @@ helm repo list
 helm search repo bitnami |grep mysql
 # 更新软件包
 helm repo update
-# 
+# helm安装mysql
+helm install bitnami/mysql --generate-name
+# 查看已安装列表
+helm list 
+# 卸载
+helm uninstall <软件包名>
 ```
+安装
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061022913.png)
+
+卸载
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061021329.png)
+
+
 
 helm 的三大概念：
 
