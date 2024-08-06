@@ -34,3 +34,37 @@ kubectl get pods -n kube-system
 requests 和 limit 没有设置=BestEffort
 requests 小于 limit=Burstable
 requests 等于 limit=Guaranteed
+
+
+```shell
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-and-mem
+spec:
+  hard:
+    pods: 5
+    services: 1
+    services.loadbalancers: 2
+# hard：这个字段定义了资源的硬性限制，即在这个命名空间中能够使用的资源上限。
+# pods: 5：这个限制表示在这个命名空间中最多可以有 5 个 Pod。
+# services: 1：这个限制表示在这个命名空间中最多可以创建 1 个 Service。
+# services.loadbalancers: 2：这个限制表示在这个命名空间中最多可以创建 2 个带有 LoadBalancer 类型的 Service
+```
+
+```shell
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-and-mem
+spec:
+  scopes:
+  - BestEffort
+  - NotTerminatin
+  hard:
+    pods: 5
+# scopes：这个字段定义了适用的资源范围。资源配额可以应用于不同的资源类别，这里指定了以下范围：
+# BestEffort：表示这个资源配额适用于 `BestEffort` 类别的 Pod。`BestEffort` 是一种资源分配策略，用于不要求保证资源的 Pod。
+# NotTerminatin：这是一个拼写错误，应该是 `NotTerminating`。这个范围表示这个资源配额适用于 NotTerminating 类别的资源，即不包括那些正在终止中的 Pod。
+# pods: 5：指定了在命名空间中最多可以有 5 个 Pod 的限制
+```
