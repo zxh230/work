@@ -155,4 +155,43 @@ kube 02:
 # 安装并启动httpd
 yum -yq install httpd
 systemctl start httpd
+# 创建仓库目录
+mkdir /var/www/html/charts/
+cd /var/www/html/charts/
+# 复制kube01上的ngiinx-zxh-0.1.0.tgz
+scp kube01:/root/helm/nginx-zxh-0.1.0.tgz ./
+# 修改bashrc
+echo "source <(helm completion bash)" >> ~/.bashrc
+source ~/.bashrc
+# 生成仓库索引页文件
+helm repo index ./charts/
+# 查看
+cat charts/index.html
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061501847.png)
+
+kube 01:
+```shell
+# 添加仓库，IP为kube02的IP地址
+helm repo add zxh http://10.15.200.242:/charts
+# 验证
+helm repo list
+# 查询仓库内容
+helm search repo zxh
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061505488.png)
+
+从本地仓库下载
+
+```shell
+helm install nginx zxh/nginx-zxh
+# 验证
+kubectl get po
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061508491.png)
+
+添加仓库项目
+
+```shell
+
 ```
