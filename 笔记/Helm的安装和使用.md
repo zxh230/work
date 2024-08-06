@@ -117,3 +117,7 @@ helmify -version
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408061138744.png)
 
+helmify
+chart. yaml：包含 chart 的信息，例如名字，版本，描述等
+templates：包含安装 helm chart 时最终部署的所有清单文件
+valumes：
