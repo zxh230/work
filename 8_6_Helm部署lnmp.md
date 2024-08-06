@@ -370,7 +370,41 @@ vim values.yaml
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062313889.png)
 
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062322366.png)
 
+修改 zxh/templates/helm. yaml 文件
+
+将网页文件内容粘贴到此处，db_host修改为 IP
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062327101.png)
+
+phpsvc 处添加指定 ip
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062331564.png)
+
+mysqlsvc 处添加指定 IP
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062332131.png)
+
+修改最后的 ingress 部分（secretName 新增变量）
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062333538.png)
+
+更改结束后验证
+```shell
+helm install zxh .
+# 查看是否Running
+# 查看service IP 是否正确
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062340269.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408062340312.png)
+
+验证访问
+
+```shell
+
+```
 
 搭建本地仓库
 
