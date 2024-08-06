@@ -12,6 +12,18 @@ echo "source <(helm completion bash)" >> ~/.bashrc
 source ~/.bashrc
 # 添加仓库
 helm repo add bitnami https://charts.bitnami.com/bitnami
+# 查看helm仓库
+helm repo list
 # 
 ```
+
+helm 的三大概念：
+
+chart：代表 helm 的包，可以看作：dnf，apt，brew，
+
+repostory：用来存放和共享 charts 的地方，可以看作为：仓库地址
+
+release：是 kubernetes 中 chart 的实例
+
+helm 安装 charts 到 kubernetes 中，每次安装都会创建一个新的 release，可以在 helm 的 chart repository 中寻找到新的 chart
 
