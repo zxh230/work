@@ -148,3 +148,61 @@ metadata:
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071925513.png)
 
+指定 vault
+
+```shell
+# nginx.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+spec:
+  serviceAccountName: sa1
+  containers:
+  - name: main
+    image: busybox:1.36
+    imagePullPolicy: IfNotPresent
+    command: ["/bin/sh","-c","sleep 1d"]
+    volumeMounts:
+    - name: sa1-token
+      mountPath: /var/run/secret/tokens
+  volumes:
+  - name: sa1-token
+    projected:
+      sources:
+      - serviceAccountToken:
+          path: sa1-token
+          expirationSeconds: 7200
+          audience: vault
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071948559.png)
+
+解密
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071949534.png)
+
+权限验证
+
+```shell
+kubectl --as=system:serviceaccount:default:sa1 auth can-i get pod
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071952160.png)
+
+```shell
+# nginx.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+spec:
+  serviceAccountName: sa1
+  containers:
+  - name: main
+    image: nginx:latest
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 80
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071957528.png)
+
