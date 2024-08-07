@@ -29,3 +29,37 @@ kubectl edit -n kubernetes-dashboard svc kubernetes-dashboard-kong-proxy
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408070929799.png)
 
+```shell
+# 生成token
+vim test.yaml
+###
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+--- 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+###
+# 生成
+kubectl -n kubernetes-dashboard create token admin-user
+# 粘贴到网页进行登录
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071056415.png)
+
+
+
+
+
