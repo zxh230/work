@@ -206,3 +206,17 @@ spec:
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071957528.png)
 
+此时无法获取 pod
+
+```shell
+kubectl create clusterrolebinding cbind1 --clusterrole cluster-admin --serviceaccount default:sa1
+kubectl --as=system:serviceaccount:default:sa1 auth can-i get pod
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408072007336.png)
+
+再次获取 pod
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408072008423.png)
+
+获取成功
+
