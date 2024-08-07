@@ -21,5 +21,11 @@ helm install kubernetes-dashboard-web . --namespace kubernetes-dashboard
 
 ```shell
 kubectl edit -n kubernetes-dashboard svc kubernetes-dashboard-kong-proxy 
-
 ```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408070929942.png)
+
+
+访问 \https://IP地址:40080
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408070929799.png)
+
