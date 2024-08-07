@@ -60,6 +60,5 @@ kubectl -n kubernetes-dashboard create token admin-user
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408071056415.png)
 
 
-
-
+******
 
