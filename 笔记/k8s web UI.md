@@ -19,3 +19,7 @@ helm install kubernetes-dashboard-web . --namespace kubernetes-dashboard
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408070908610.png)
 
+```shell
+kubectl edit -n kubernetes-dashboard svc kubernetes-dashboard-kong-proxy 
+
+```
