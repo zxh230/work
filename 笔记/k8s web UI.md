@@ -11,6 +11,11 @@ helm pull kubernetes-dashboard/kubernetes-dashboard
 # 解压并修改
 tar -zxf kubernetes-dashboard-7.5.0.tgz 
 cd kubernetes-dashboard/
-vim values.yaml 
 ```
+
+安装 kubernetes-dashboard
+```shell
+helm install kubernetes-dashboard-web . --namespace kubernetes-dashboard
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408070908610.png)
 
