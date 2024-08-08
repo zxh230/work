@@ -452,7 +452,7 @@ yum -yq install httpd
 mkdir /var/www/html/charts/
 cd /var/www/html/charts/
 # 查看是否有tgz包
-ls
+lss
 # 生成索引页文件，如果不是新仓库请忽略
 helm repo index ./charts/
 # 合并索引页文件，如果不是旧仓库请忽略
