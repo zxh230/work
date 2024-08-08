@@ -100,3 +100,57 @@ roleRef:
   name: secrets-reader
   apiGroup: rbac.authorization.k8s.io
 ```
+
+
+ManagerGroup
+
+```shell
+# managergroup.yaml 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: read-secret-global
+  namespace: default
+subjects:
+- kind: Group
+  name: manager
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408081059590.png)
+
+更新 role
+`kubectl auth reconcile -f managergroup.yaml `
+
+******
+
+RBAC 实践
+
+```shell
+# deploymont-cluster-role.yaml 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: deployment-clusterrole
+rules:
+- apiGroups:
+  - app
+  resources:
+  - deployment
+  - daemonsets
+  - statefulsets
+  verbs:
+  - create
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408081109942.png)
+
+```shell
+kubectl create namespace app-team1
+kubectl create serviceaccount cicd-token --namespace app-team1
+kubectl create rolebinding deploymont-rolebinding --clusterrole deploymont-cluster-clusterrole --serviceaccount app-team1:cicd-token --namespace app-team1 
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408081115286.png)
+
