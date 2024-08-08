@@ -63,4 +63,40 @@ rules:
 - clusterRole binding
 
 ### role binding
+```shell
+# rolebinding.yaml 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: default
+subjects:
+- kind: User
+  name: zxh
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408081053748.png)
 
+
+ClusterRoleBinding
+
+```shell
+# clusterRoleBinding.yaml 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-secrets
+  namespace: development
+subjects:
+- kind: User
+  name: dave
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secrets-reader
+  apiGroup: rbac.authorization.k8s.io
+```
