@@ -342,3 +342,22 @@ zabbix_get  -s 10.15.200.102 -p 10050 -k "nginx_active"
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101026986.png)
 
+配置 zabbix 网页
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101033466.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101034010.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101033897.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101034826.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101035857.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101035026.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101036549.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101036030.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101036663.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101037817.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101042495.png)
