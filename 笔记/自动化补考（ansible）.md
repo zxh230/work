@@ -322,7 +322,7 @@ vim nfs.yml
 
 第二题
 
-监控 nginx 进程数
+监控 nginx 进程数（mysql 进程监控替换 nginx 为 mysql 即可）
 
 ```shell
 vim /active
@@ -342,7 +342,7 @@ zabbix_get  -s 10.15.200.102 -p 10050 -k "nginx_active"
 ```
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101026986.png)
 
-配置 zabbix 网页
+配置 zabbix 网页，模板 nginx 与 mysql 同理
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101033466.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101034010.png)
