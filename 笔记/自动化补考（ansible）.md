@@ -318,3 +318,27 @@ vim nfs.yml
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101008732.png)
 
+******
+
+第二题
+
+监控 nginx 进程数
+
+```shell
+vim /active
+###
+#!/bin/bash
+CURRENT_PROCESSES=$(ps aux | grep -c '[n]ginx')
+echo $CURRENT_PROCESSES
+###
+chmod 777 /active.sh
+vim /etc/zabbix_agentd.conf.d/active.conf
+###
+UserParameter=nginx_active[*],/active.sh
+###
+systemctl restart zabbix-agent
+# 在监控端查看
+zabbix_get  -s 10.15.200.102 -p 10050 -k "nginx_active"
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/202408101026986.png)
+
