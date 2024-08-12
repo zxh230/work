@@ -27,6 +27,15 @@ docker start nginx
 docker commit nginx web2:zxh
 docker export nginx -o web3.tar
 docker import web3.tar web3:zxh
+# 启动镜像
+docker run -itd --name web2 web2:zxh bash
+docker run -itd --name web3 web3:zxh bash
 # 查看镜像
 docekr ps -a
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240812191953.png)
+
+修改网页文件
+```shell
+
 ```
