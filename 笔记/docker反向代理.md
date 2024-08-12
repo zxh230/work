@@ -56,5 +56,55 @@ curl 172.17.0.4
 
 ```shell
 docker run -itd --name nginx nginx:1.24 bash
-
+docker exec -it nginx bash
+cd /etc/nginx/conf.d/
+# 写入配置文件，多一个是因为容器IP目前不固定，防止多次更改所以写四个（与容器总数相等）
+cat <<EOF > /etc/nginx/conf.d/bbb.conf
+upstream wwwbackend {
+    server 172.17.0.2:80 weight=1;
+    server 172.17.0.3:80 weight=1;
+    server 172.17.0.4:80 weight=1;
+    server 172.17.0.5:80 weight=1;
+}
+server {
+    server_name _;
+    location / {
+        proxy_pass http://wwwbackend;
+        proxy_set_header Host \$host;
+    }
+}
+EOF
 ```
+```shell
+# 重启容器并开启nginx
+docker restart nginx
+docker exec -itd nginx nginx
+# 查看IP地址并进行测试轮询
+docker inspect nginx |grep -i "ipaddr"
+# 循环（或者手动访问）
+for h in $(seq 1 10)
+do
+curl 172.17.0.5
+done
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240812194330.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240812194513.png)
+
+推送镜像到阿里云镜像仓库
+
+```shell
+# 改名，改为自己的阿里云地址
+docker tag web2:zxh registry.cn-hangzhou.aliyuncs.com/zxh230/nginx:zxh
+# 开始推送
+docker push registry.cn-hangzhou.aliyuncs.com/zxh230/nginx:zxh 
+```
+
+上传成功
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240812195218.png)
+
+查看阿里云镜像仓库，发现 nginx 镜像新增一个版本
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240812195444.png)
