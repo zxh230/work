@@ -22,7 +22,7 @@ make -j 4 && make install
 echo nginx >> ~/.bashrc
 # 退出容器，进行打包
 exit
-docker start nginx
+docker start web1
 # 后面的镜像名与版本号可以自定义
 docker commit nginx web2:zxh
 docker export nginx -o web3.tar
@@ -37,5 +37,24 @@ docekr ps -a
 
 修改网页文件
 ```shell
+docker exec -itd web1 sh -c 'echo "zhaojiedong1" > /usr/local/nginx/html/index.html'
+docker exec -itd web2 sh -c 'echo "zhaojiedong2" > /usr/local/nginx/html/index.html'
+docker exec -itd web3 sh -c 'echo "zhaojiedong3" > /usr/local/nginx/html/index.html'
+# 查看容器IP地址
+docker inspect web1 web2 web3 |grep \"IPAddress\"
+# 访问测试
+curl 172.17.0.2
+curl 172.17.0.3
+curl 172.17.0.4
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240812193112.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240812193138.png)
+
+
+配置 nginx 反向代理
+
+```shell
+docker run -itd --name nginx nginx:1.24 bash
 
 ```
