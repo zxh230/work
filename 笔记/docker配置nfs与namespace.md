@@ -1,4 +1,4 @@
-配置 vsftpd
+配置 nfs
 ```shell
 # 创建挂载目录
 mkdir /nfs
