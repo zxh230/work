@@ -1,5 +1,3 @@
-# 构建nginx镜像
-
 确保存在rockylinux9镜像，是rockylinux9即可
 ![image-20240712234507555](https://gitee.com/zhaojiedong/img/raw/master/image-20240712234507555.png)
 
