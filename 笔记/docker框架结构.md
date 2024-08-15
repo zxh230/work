@@ -13,7 +13,7 @@ docker image inspect quay.io/rockylinux/rockylinux:9
 
 2，/var/lib/docker/image
       |—  /imagedb  镜像的源文件（也是镜像的所需层）
-      |—  /layerdb  镜像分成关系（parent记录上层镜像）
+      |—  /layerdb  镜像分层关系（parent记录上层镜像）
 
 ******
 容器层：
