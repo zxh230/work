@@ -37,3 +37,16 @@ docker build -t nginx0710:v1.0 ./
 # 构建完成后结束
 ```
 
+启动
+```shell
+# 启动镜像，--restart always可不加，此选项为容器故障后自动重启
+docker run -itd --name web1 --restart always nginx0710:v1.0
+docker run -itd --name web2 --restart always nginx0710:v1.0
+docker run -itd --name web3 --restart always nginx0710:v1.0
+# 访问
+curl 172.17.0.2
+curl 172.17.0.3
+curl 172.17.0.4
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240815172335.png)
+
