@@ -26,14 +26,13 @@ vim start_mysql.sh
 #!/bin/bash
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 &
-    sleep 5
 fi
 /usr/local/mysql/bin/mysqld --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 &
 sleep 5
 if [ "$1" = "-uroot" ]; then
     exec mysql "$@"
 else
-    tail -f /dev/null
+    exec sh -c "$1"
 fi
 ###
 # 开始构建
@@ -45,3 +44,7 @@ docker run -it --name mysql --rm mysql:8 -uroot -p
 ```
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240816211343.png)
+
+也可以支持使用其他命令
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240816212544.png)
