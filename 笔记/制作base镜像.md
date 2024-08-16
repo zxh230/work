@@ -4,7 +4,7 @@
 
 ### 要求：
 
-> 1、构建一个rockylinux9.4版本的base镜像。 可以使用常规命令且可以使用ifconfig。 2、并且将上述镜像传到registry的镜像仓库，使用用户名good，密码123456，账户
+> 1、构建一个rockylinux9.4版本的base镜像。 可以使用常规命令且可以使用ifconfig。 2、并且将上述镜像传到registry的镜像仓库，使用用户名good，密码123456
 
 ### 设备：
 
@@ -32,7 +32,7 @@ cp /etc/resolv.conf systemd/etc/
 cat systemd/etc/yum.repos.d/rocky.repo
 ```
 
-https://gitee.com/zhaojiedong/img/raw/master/202407112001009.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112001009.png)
 
 ```bash
 # 创建件，写入版本号
@@ -60,7 +60,7 @@ docker build -t rockylinux:9.4 ./
 docker images
 ```
 
-!https://gitee.com/zhaojiedong/img/raw/master/202407112043657.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112043657.png)
 
 配置私人仓库registary
 
@@ -71,7 +71,7 @@ docker pull registry:2
 vim /usr/lib/systemd/system/docker.service
 ```
 
-!https://gitee.com/zhaojiedong/img/raw/master/202407112049387.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112049387.png)
 
 ```bash
 # 重启
@@ -83,7 +83,8 @@ yum -yq install openssl openssl-devel
 sysctl -p
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/138e954e-aeff-453a-8241-11993cbc0087/fce0ea1a-e856-489f-8c3d-117174451bd9/Untitled.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240816132403.png)
+
 
 ------
 
@@ -107,7 +108,7 @@ vim /etc/pki/tls/openssl.cnf
 
 在下方的v3_ca处添加
 
-!https://gitee.com/zhaojiedong/img/raw/master/202407112056792.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112056792.png)
 
 ```bash
 # 创建证书目录
@@ -116,7 +117,7 @@ mkdir -p /root/base7_11/certs
 openssl req -newkey rsa:4096 -nodes -sha256 -keyout /root/base7_11/certs/domain.key -x509 -days 3650 -out /root/base7_11/certs/domain.cert
 ```
 
-!https://gitee.com/zhaojiedong/img/raw/master/202407112100072.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112100072.png)
 
 ```bash
 # 启动镜像
@@ -125,7 +126,7 @@ docker run -itd -p 443:443 --restart always --volume /opt/data/registry/:/var/li
 curl -k --key /certs/domain.key <https://10.15.200.241:443/v2/_catalog>
 ```
 
-!https://gitee.com/zhaojiedong/img/raw/master/202407112107336.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112107336.png)
 
 ```bash
 # 创建用户目录
@@ -146,7 +147,7 @@ docker login 10.15.200.241:5000
 # 密码123456
 ```
 
-!https://gitee.com/zhaojiedong/img/raw/master/202407112114601.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112114601.png)
 
 ```bash
 # 下载镜像
@@ -155,4 +156,4 @@ docker pull 10.15.200.241:5000/rockylinux:9.4
 docker images
 ```
 
-!https://gitee.com/zhaojiedong/img/raw/master/202407112115598.png
+![](https://gitee.com/zhaojiedong/img/raw/master/202407112115598.png)
