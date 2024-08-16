@@ -24,9 +24,8 @@ CMD ["-u", "root", "-p"]
 vim start_mysql.sh
 ###
 #!/bin/bash
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-    /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 &
-fi
+/usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 &
+sleep 5
 /usr/local/mysql/bin/mysqld --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 &
 sleep 5
 if [ "$1" = "-uroot" ]; then
