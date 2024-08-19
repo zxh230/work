@@ -11,3 +11,6 @@ docker run -itd -p 5000:5000 --restart always --volume /opt/deta/registry:/var/l
 curl 10.15.200.242:5000/v2/_catalog
 ```
 
+修改配置文件
+
+添加 ``
