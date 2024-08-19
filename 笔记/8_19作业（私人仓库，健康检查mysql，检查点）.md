@@ -157,3 +157,6 @@ ifconfig
 docker tag mysql:8 10.15.200.241:5000/mysql:8
 docker push 10.15.200.241:5000/mysql:8 
 ```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819204727.png)
+
