@@ -171,6 +171,24 @@ docker ps
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819205210.png)
 
 ```shell
-# 进入数据库，创建db，并创建检查点
+# 进入数据库，创建db
+docker exec -it mysql bash
+mysql -uroot -p
+## 数据库内
+create database zxh;
+show databases;
+exit
+##
+# 退出容器
+exit
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819205445.png)
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819205616.png)
+
+```shell
+# 创建检查点
+yum install criu -yq
 
 ```
