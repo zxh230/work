@@ -74,6 +74,7 @@ mknod -m 666 /dev/unandom c 1 9
 ```shell
 # 导入rpm密钥
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9
+exit
 tar -cf rockylinux9_4.tar systemd/
 # 创建空镜像
 tar -cvf /dev/null |docker import - scratch
