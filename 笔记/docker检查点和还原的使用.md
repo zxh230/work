@@ -38,6 +38,6 @@ docker run --help |grep security
 seccomp=unconfined：意味着容器将运行在不受限的安全环境中，通常意味着容器可以执行任何系统级别的特权操作
 
 ```shell
-docker run --security-opt seccomp=unconfined --name cr -d busybox:1.36 /bin/sh -c "i=0; while true; do echo $i; $i=$(expr $i + 1); sleep 1; done"
+docker run --security-opt seccomp:unconfined --name cr -d busybox:1.36 /bin/sh -c 'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'
 ```
 
