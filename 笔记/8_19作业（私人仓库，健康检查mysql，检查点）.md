@@ -51,5 +51,29 @@ docker 02 (10.15.200.242) 登录
 ```shell
 mkdir rocky9
 supermin --prepare yum coreutils dnf iproute iputils net-tools bash wget curl tar rpm -o rocky9/
+# 确认软件包是否安装
+cat rocky9/packages 
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819200848.png)
+
+```shell
+mkdir systemd
+supermin -v --build --format chroot rocky9/ -o systemd/
+echo 9.4 > systemd/etc/dnf/vars/releasever
+# 进入系统
+chroot systemd/ bash
+##
+mknod -m 666 /dev/random c 1 8
+mknod -m 666 /dev/unandom c 1 9
+# 查看验证是否添加并一致
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819201141.png)
+
+```shell
+# 导入rpm密钥
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9
+# 验证是否能安装软件包
 
 ```
