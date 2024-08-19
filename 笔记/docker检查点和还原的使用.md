@@ -41,3 +41,15 @@ seccomp=unconfined：意味着容器将运行在不受限的安全环境中，�
 docker run --security-opt seccomp:unconfined --name cr -d busybox:1.36 /bin/sh -c 'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'
 ```
 
+创建检查点
+
+```shell
+# 安装软件包
+yum install criu -yq
+# 创建检查点
+docker checkpoint create cr ckp
+docker checkpoint ls cr 
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819170652.png)
+
