@@ -190,5 +190,5 @@ exit
 ```shell
 # 创建检查点
 yum install criu -yq
-
+docker checkpoint create mysql aaa
 ```
