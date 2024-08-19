@@ -160,3 +160,17 @@ docker push 10.15.200.241:5000/mysql:8
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819204727.png)
 
+创建容器
+
+```shell
+docker run -itd --security-opt seccomp=unconfined --name mysql mysql:8 bash
+# 验证
+docker ps
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819205210.png)
+
+```shell
+# 进入数据库，创建db，并创建检查点
+
+```
