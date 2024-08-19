@@ -207,5 +207,17 @@ ls
 
 ```shell
 # 打包
+tar -cf aaa.tar aaa/
+mv aaa.tar ~/
+```
 
+```shell
+# docker02
+docker pull 10.15.200.241:5000/mysql:8
+docker run -itd --security-opt seccomp=unconfined --name mysql mysql:8
+docker ps -a
+cd /var/lib/docker/containers/7c1d2eceab01d083330ab5c374791f6ba23b68e9b7d56390bc49c22ab8822d43/checkpoints/
+tar ~/aaa.tar ./
+docker checkpoint ls mysql
+docker start --checkpoint aaa mysql
 ```
