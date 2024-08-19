@@ -142,7 +142,18 @@ fi
 ###
 # 开始构建
 docker build -t mysql:8 ./
-# 测试登录
-docker run -it --name mysql --rm mysql:8 -uroot -p
+# 验证
+docker run -it --rm mysql:8 bash
 # 等待mysql初始化完成
-# 无密码，直接回车即可进入mysql
+ifconfig
+```
+
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819204348.png)
+
+将 mysql 镜像上传到私人仓库
+
+```shell
+docker tag mysql:8 10.15.200.241:5000/mysql:8
+docker push 10.15.200.241:5000/mysql:8 
+```
