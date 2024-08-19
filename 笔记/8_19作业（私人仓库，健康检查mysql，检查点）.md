@@ -75,7 +75,7 @@ mknod -m 666 /dev/unandom c 1 9
 # 导入rpm密钥
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9
 exit
-tar -cf rockylinux9_4.tar systemd/
+tar -cf rockylinux9_4.tar -C systemd .
 # 创建空镜像
 tar -cvf /dev/null |docker import - scratch
 # 使用Dockerfile构建镜像
@@ -92,8 +92,57 @@ docker images
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819202036.png)
 
-#### 构建 mysql 并配置健康检查
+验证能否进入容器
 
 ```shell
-
+docker run -it --rm rocky9:zxh bash
+ifconfig
 ```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819203811.png)
+
+#### 构建 mysql 并配置健康检查
+
+导入压缩包
+mysql-8.0.38-linux-glibc 2.28-x 86_64. tar. xz
+
+```shell
+# 编写Dockerfile
+vim Dockerfile
+###
+FROM rocky9:zxh
+RUN dnf -y install xz perl-JSON perl-Data-Dumper libaio numactl
+HEALTHCHECK --interval=5s --timeout=3s CMD ls /usr/sbin/ifconfig ||exit 1
+COPY mysql-8.0.38-linux-glibc2.28-x86_64.tar.xz /root/
+RUN tar -xf /root/mysql-8.0.38-linux-glibc2.28-x86_64.tar.xz -C /usr/local/ \
+    && mv /usr/local/mysql-8.0.38-linux-glibc2.28-x86_64 /usr/local/mysql \
+    && ln -s /usr/local/mysql/bin/* /usr/local/bin/
+RUN useradd mysql \
+    && mkdir /var/lib/mysql /var/run/mysqld /var/log/mysql \
+    && chown -R mysql:mysql /var/lib/mysql /var/run/mysqld /var/log/mysql
+COPY start_mysql.sh /usr/local/bin/start_mysql.sh
+RUN chmod +x /usr/local/bin/start_mysql.sh
+EXPOSE 3306
+ENTRYPOINT ["/usr/local/bin/start_mysql.sh"]
+CMD ["-u", "root", "-p"]
+###
+# 编写启动识别脚本
+vim start_mysql.sh
+###
+#!/bin/bash
+/usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 &
+sleep 5
+/usr/local/mysql/bin/mysqld --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 &
+sleep 5
+if [ "$1" = "-uroot" ]; then
+    exec mysql "$@"
+else
+    exec sh -c "$1"
+fi
+###
+# 开始构建
+docker build -t mysql:8 ./
+# 测试登录
+docker run -it --name mysql --rm mysql:8 -uroot -p
+# 等待mysql初始化完成
+# 无密码，直接回车即可进入mysql
