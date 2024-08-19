@@ -192,3 +192,20 @@ exit
 yum install criu -yq
 docker checkpoint create mysql aaa
 ```
+
+如果创建检查点报错尝试重启容器
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819211753.png)
+
+```shell
+# 进入检查点目录
+cd /var/lib/docker/containers/7c1d2eceab01d083330ab5c374791f6ba23b68e9b7d56390bc49c22ab8822d43/checkpoints/
+ls
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819211943.png)
+
+```shell
+# 打包
+
+```
