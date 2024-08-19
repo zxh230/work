@@ -74,6 +74,25 @@ mknod -m 666 /dev/unandom c 1 9
 ```shell
 # 导入rpm密钥
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9
-# 验证是否能安装软件包
+tar -cf rockylinux9_4.tar systemd/
+# 创建空镜像
+tar -cvf /dev/null |docker import - scratch
+# 使用Dockerfile构建镜像
+vim Dockerfile
+### 
+FROM scratch
+LABEL  maintainer="zxh"
+ADD rockylinux9_4.tar /
+CMD ["/bin/bash"]
+###
+docker build -t rocky9:zxh ./
+docker images
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240819202036.png)
+
+#### 构建 mysql 并配置健康检查
+
+```shell
 
 ```
