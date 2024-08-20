@@ -49,7 +49,16 @@ docker run -itd --name proxy_nginx -v /root/homework/proxy_nginx/nginx.conf:/usr
 docker ps
 # 查看是否为Up状态
 # 启动后端节点并挂载网页文件
-docker run -itd --name web1 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index.html -p 8081:80 nginx:zxh
-docker run -itd --name web2 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index.html -p 8082:80 nginx:zxh
-docker run -itd --name web3 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index.html -p 8083:80 nginx:zxh
+docker run -itd --name web1 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index1.html -p 8081:80 nginx:zxh
+docker run -itd --name web2 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index2.html -p 8082:80 nginx:zxh
+docker run -itd --name web3 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index3.html -p 8083:80 nginx:zxh
+# 访问
+curl 10.15.200.241
+curl 10.15.200.241:8081
+curl 10.15.200.241:8082
+curl 10.15.200.241:8083
+# 浏览器访问物理机IP地址
 ```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240820202926.png)
+
