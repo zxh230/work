@@ -13,6 +13,12 @@ mkdir mysql
 mkdir worepress
 ```
 
+
+- 创建网卡
+```shell
+# 网卡名docker 网段为172.86.86.0 网关为172.86.86.1
+docker network create --driver bridge --subnet 172.86.86.0/24 --gateway 172.86.86.1 docker
+```
 - 构建镜像
 ```shell
 # 构建php镜像,rocky9为官方镜像
@@ -531,4 +537,114 @@ pm.max_spare_servers = 3
 
 解压 wordpress.tar 压缩包
 
-[点击下载]()
+[点击下载](https://gitee.com/zhaojiedong/work/raw/master/%E6%96%87%E4%BB%B6/wordpress.tar)
+
+```shell
+tar -xf /root/wordpress.tar -C ../wordpress/
+ls ../wordpress/
+# wp-config.php内的内容需要与数据库对应
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240820193745.png)
+
+```shell
+# 开始构建php
+docker build -t php_lnmp:zxh ./
+docker images
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240820193955.png)
+
+构建 nginx 镜像
+
+```shell
+# 编写Dockerfile
+cd ../nginx/
+vim Dcokerfile
+###
+FROM rocky:9
+RUN yum -y install iproute iputils procps-ng net-tools make gcc zlib-devel pcre-devel pcre zlib openssl openssl-devel
+ADD nginx-1.24.0.tar.gz /
+WORKDIR /nginx-1.24.0
+RUN ./configure --prefix=/usr/local/nginx --sbin-path=/usr/sbin && make && make install
+RUN /usr/sbin/nginx
+WORKDIR /
+COPY nginx.conf /usr/local/nginx/conf/nginx.conf
+EXPOSE 80/tcp
+CMD ["nginx","-g","daemon off;"]
+###
+# 编写nginx配置文件
+vim nginx.conf
+###
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    server {
+        listen       80;
+        server_name  localhost;
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+        location /wp-admin/ {
+        index index.php index.html;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+        location ~ \.php$ {
+            root           html;
+            fastcgi_pass   172.86.86.3:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+    }
+}
+###
+# 拷贝nginx安装包
+cp /root/nginx-1.24.0.tar.gz ./
+# 开始构建
+docker build -t nginx_lnmp:zxh ./
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240820194459.png)
+
+mysql 可以使用之前构建的 mysql 镜像
+
+[指路]([笔记/构建nginx镜像.md · zxh/work - 码云 - 开源中国 (gitee.com)](https://gitee.com/zhaojiedong/work/blob/master/%E7%AC%94%E8%AE%B0/%E6%9E%84%E5%BB%BAnginx%E9%95%9C%E5%83%8F.md))
+
+启动并挂载 wordpress，指定网卡
+
+更改 wordpress 目录为自己的 wordpress 目录位置
+
+```shell
+# 启动nginx
+docker run -itd --name nginx --network docker --ip 172.86.86.2 -p 8080:80 --volume /root/homework/lnmp_net/wordpress/:/usr/local/nginx/html/ nginx_lnmp:zxh 
+# 启动php
+docker run -itd --name php --network docker --ip 172.86.86.3 --volume /root/homework/lnmp_net/wordpress:/usr/local/nginx/html/ php_lnmp:zxh
+# 启动php-fpm
+docker exec -itd php /usr/local/php/sbin/php-fpm
+# 启动mysql
+docker run -itd --name mysql --network docker --ip 172.86.86.4 mysql:8 bash
+# 创建数据库，授权
+docker exec -it mysql mysql
+## 数据库内
+create database zxh;
+create user 'root'@'172.86.86.%' identified by '123.com';
+grant all on *.* to 'root'@'172.86.86.%';
+exit
+# 访问wordpress网站
+10.15.200.241:8080/index.php
+```
+
+配置 web 页面并登录
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240820195125.png)
