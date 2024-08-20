@@ -32,19 +32,6 @@ http {
     }
     server {
         listen       80;
-        server_name  localhost;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-        }
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
-    server {
-        listen       80;
         server_name  10.15.200.241;
         location / {
             proxy_pass http://wwwbackend;
@@ -57,10 +44,12 @@ http {
 }
 ###
 # 启动容器，nginx.conf路径要正确
-docker run -itd --name proxy_nginx -v /root/homework/proxy_nginx/nginx.conf:/usr/local/nginix/conf/nginx.conf:ro -p 80:80 nginx:zxh
+docker run -itd --name proxy_nginx -v /root/homework/proxy_nginx/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro -p 80:80 nginx:zxh
 # 检查容器是否正常运行
 docker ps
 # 查看是否为Up状态
 # 启动后端节点并挂载网页文件
-
+docker run -itd --name web1 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index.html -p 8081:80 nginx:zxh
+docker run -itd --name web2 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index.html -p 8082:80 nginx:zxh
+docker run -itd --name web3 -v /root/homework/proxy_nginx/index.html:/usr/local/nginx/html/index.html -p 8083:80 nginx:zxh
 ```
