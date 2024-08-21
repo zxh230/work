@@ -640,6 +640,9 @@ pm.max_spare_servers = 3
 ;php_admin_flag[log_errors] = on
 ;php_admin_value[memory_limit] = 32M
 ###
+
+
+
 vim www2.conf
 ###
 ; Start a new pool named 'www'.
