@@ -1144,6 +1144,7 @@ vim index1.php
   else {
     echo  "恭喜恭喜, 数据库连接失败1~~~\n";
   };
+  phpinfo();
 ?>
 ###
 vim index2.php
@@ -1156,6 +1157,7 @@ vim index2.php
   else {
     echo  "恭喜恭喜, 数据库连接失败2~~~\n";
   };
+  phpinfo();
 ?>
 ###
 # 创建docker-compose
