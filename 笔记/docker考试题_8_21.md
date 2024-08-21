@@ -72,7 +72,20 @@ docker 01 上登录并下载：
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240821175237.png)
 
 ******
+第三题
 
+```shell
+# 创建配置文件
+vim nginx1.conf
+###
+
+###
+```
+
+
+
+
+******
 第四题
 
 配置 zabbix 监控
