@@ -1267,7 +1267,7 @@ http {
 ###
 # 启动容器
 # 将nginx.conf文件的路径更改为自己的文件路径
-docker run -itd --name proxy_nginx -v /root/homework/kaoshi/3/nginx.conf:/usr/local/nginx/conf/nginx.conf   --network 3_kaoshi -p 9000:9000 nginx:zxh 
+docker run -itd --name proxy_nginx -v /root/homework/kaoshi/3/nginx.conf:/usr/local/nginx/conf/nginx.conf   --network 3_kaoshi -p 9000:9000 nginx:zxh
 ```
 
 浏览器访问本机 ip: 9000 实现轮询访问
