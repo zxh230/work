@@ -1234,12 +1234,37 @@ create user 'root'@'%.%.%.%' identified by '123.com';
 grant all on *.* to 'root'@'%.%.%.%';
 exit
 # 配置nginx反向代理实现轮询访问
-yun -y install nginx
 # 写入配置文件
 vim /etc/nginx/conf.d/aaa.conf
 ###
-
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    upstream wwwbackend {
+        server 10.15.200.241:8081 weight=1;
+        server 10.15.200.241:8082 weight=1;
+    }
+    server {
+        listen       80;
+        server_name  10.15.200.241;
+        location / {
+            proxy_pass http://wwwbackend;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}
 ###
+# 启动容器
+
 ```
 
 
