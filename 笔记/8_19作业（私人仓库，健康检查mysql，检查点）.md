@@ -32,7 +32,7 @@ cp /certs/domain.cert /etc/docker/certs.d/10.15.200.241\:5000/
 # 提前在docker02(10.15.200.242)上创建目录
 scp /certs/domain.cert 10.15.200.242:/etc/docker/certs.d/10.15.200.241\:5000/ca.crt
 # 创建用户
-mkdir -p /user
+mkdir -p /user	
 # httpd镜像无版本要求，默认即可，用户名密码可以自定义
 docker run --entrypoint htpasswd httpd:latest -Bbn zxh 123456 > /user/htpasswd
 # 启动容器
