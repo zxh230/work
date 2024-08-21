@@ -1223,6 +1223,16 @@ services:
         ipv4_address: 130.0.0.6
     command:
     - sleep 1d
+  proxy_nginx:
+    container_name: nginx
+    image: nginx:zxh
+    ports:
+    - 9000:9000
+    volumes:
+    - ./nginx.conf:/usr/local/nginx/conf/nginx.conf
+    networks:
+      kaoshi:
+        ipv4_address: 130.0.0.7
 networks:
   kaoshi:
     driver: bridge
@@ -1231,16 +1241,9 @@ networks:
         - subnet: 130.0.0.0/24
           gateway: 130.0.0.1
 ###
-# 开始部署
-docker compose up -d
-# 数据库授权
-docker exec -it mysql mysql
-create user 'root'@'%.%.%.%' identified by '123.com';
-grant all on *.* to 'root'@'%.%.%.%';
-exit
 # 配置nginx反向代理实现轮询访问
 # 写入配置文件
-vim /etc/nginx/conf.d/aaa.conf
+vim nginx.conf
 ###
 worker_processes  1;
 events {
@@ -1268,9 +1271,14 @@ http {
     }
 }
 ###
-# 启动容器
-# 将nginx.conf文件的路径更改为自己的文件路径
-docker run -itd --name proxy_nginx -v /root/homework/kaoshi/3/nginx.conf:/usr/local/nginx/conf/nginx.conf   --network 3_kaoshi -p 9000:9000 nginx:zxh
+# 开始部署
+docker compose up -d
+# 数据库授权
+docker exec -it mysql mysql
+create user 'root'@'%.%.%.%' identified by '123.com';
+grant all on *.* to 'root'@'%.%.%.%';
+exit
+# 验证访问
 ```
 
 浏览器访问本机 ip: 9000 实现轮询访问
