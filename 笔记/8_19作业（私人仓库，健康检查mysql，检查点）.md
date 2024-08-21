@@ -36,7 +36,7 @@ mkdir -p /user
 # httpd镜像无版本要求，默认即可，用户名密码可以自定义
 docker run --entrypoint htpasswd httpd:latest -Bbn zxh 123456 > /user/htpasswd
 # 启动容器
-docker run -itd -p 5000:5000 --restart always --volume /opt/data/registry/:/var/lib/registry --volume /user/:/user -e "REGISTRY_AUTH=htpasswd" -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/user/htpasswd  --volume /certs/:/certs/  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.cert -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key --name registry registry:2
+docker run -itd -p 5000:5000 --restart always --volume /opt/data/registry/:/var/lib/registry --volume /user/:/user -e "REGISTRY_AUTH=htpasswd"	 -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/user/htpasswd  --volume /certs/:/certs/	  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.cert -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key --name registry registry:2
 # 登录仓库
 docker login 10.15.200.241:5000
 ```
