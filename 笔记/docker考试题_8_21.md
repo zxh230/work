@@ -641,7 +641,7 @@ pm.max_spare_servers = 3
 ;php_admin_value[memory_limit] = 32M
 ###
 
-
+--------------------------------------------------------------------------------
 
 vim www2.conf
 ###
