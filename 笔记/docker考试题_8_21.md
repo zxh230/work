@@ -1253,7 +1253,7 @@ http {
         server 10.15.200.241:8082 weight=1;
     }
     server {
-        listen       80;
+        listen       9000;
         server_name  10.15.200.241;
         location / {
             proxy_pass http://wwwbackend;
@@ -1266,17 +1266,16 @@ http {
 }
 ###
 # 启动容器
-
+# 将nginx.conf文件的路径更改为自己的文件路径
+docker run -itd --name proxy_nginx -v /root/homework/kaoshi/3/nginx.conf:/usr/local/nginx/conf/nginx.conf   --network 3_kaoshi -p 9000:9000 nginx:zxh 
 ```
 
-
-
-
+浏览器访问本机 ip: 9000 实现轮询访问
 ******
 第四题
 
 配置 zabbix 监控
 
 ```shell
-# docker01
+# 
 ```
