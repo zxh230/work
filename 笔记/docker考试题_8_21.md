@@ -1140,27 +1140,33 @@ pm.max_spare_servers = 3
 vim index1.php
 ###
 <?php
-  $link = mysqli_connect('130.0.0.6','root','123.com');
-  if($link) {
-    echo  "非常开心, 数据库连接成功1!!!\n";
-  }
-  else {
-    echo  "恭喜恭喜, 数据库连接失败1~~~\n";
-  };
-  phpinfo();
+        $servername="130.49.230.6"; 
+        $Susername="root";
+        $password="123.com";
+        $conn="mysqli_connect ($servername,$Susername,$password)";
+        if(!$conn){
+                die ("Mysql无法连接222!");
+        }
+        echo "MysQL连接成功111！！！";
+?>
+<?php
+        phpinfo();
 ?>
 ###
 vim index2.php
 ###
 <?php
-  $link = mysqli_connect('130.0.0.6','root','123.com');
-  if($link) {
-    echo  "非常开心, 数据库连接成功2!!!\n";
-  }
-  else {
-    echo  "恭喜恭喜, 数据库连接失败2~~~\n";
-  };
-  phpinfo();
+        $servername="130.49.230.6"; 
+        $Susername="root";
+        $password="123.com";
+        $conn="mysqli_connect ($servername,$Susername,$password)";
+        if(!$conn){
+                die ("Mysql无法连接222!");
+        }
+        echo "MysQL连接成功222！！！";
+?>
+<?php
+        phpinfo();
 ?>
 ###
 # 创建docker-compose
@@ -1273,11 +1279,6 @@ http {
 ###
 # 开始部署
 docker compose up -d
-# 数据库授权
-docker exec -it mysql mysql
-create user 'root'@'%.%.%.%' identified by '123.com';
-grant all on *.* to 'root'@'%.%.%.%';
-exit
 # 验证访问
 ```
 
