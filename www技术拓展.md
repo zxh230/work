@@ -27,4 +27,32 @@ FreeBSD:
 
 ## 网站服务
 
+Nginx:  
+是高性能的Web服务器和反向代理服务器  
+特点：轻量级,高并发,低内存消耗  
+适用于高流量网站,负载均衡器,反向代理
 
+Apache:  
+最广泛使用的Web服务器软件  
+特点：稳定可靠,模块化设计,功能丰富  
+适用于各种规模的网站,共享主机环境
+
+Lighttpd:  
+What: 轻量级的开源Web服务器  
+Why: 低内存占用,高性能,安全性好  
+适用于小型网站,嵌入式系统,资源受限环境
+
+PHP:  
+What: 服务器端脚本语言  
+Why: 易学易用,广泛支持,开发效率高  
+Where: 动态网站开发,Web应用程序,内容管理系统
+
+Tomcat:  
+What: Java Servlet容器和Web服务器  
+Why: 支持Java Servlet和JSP,轻量级  
+Where: Java Web应用部署,中小型Java项目
+
+Resin:  
+What: 高性能Java应用服务器  
+Why: 快速,可靠,支持PHP  
+Where: 大型Java企业应用,高并发Web系统
