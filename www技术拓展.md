@@ -113,3 +113,79 @@ OneProxy
 
 ## 代理相关
 
+LVS (四层代理)
+LVS 是一个处理网络请求的负载均衡工具
+性能高，专门处理传输层（TCP/UDP）流量
+适用于高并发的 Web 服务和数据库集群
+
+Keepalived
+Keepalived 是用来实现服务高可用性的工具
+能自动检测故障并切换到备用服务器
+适用于需要高可用的服务器集群。
+
+HAProxy
+HAProxy 是一个处理网络流量的负载均衡器
+支持传输层和应用层，性能优秀
+适用于高流量的 Web 服务和 API 网关。
+
+Nginx（七层代理）
+Nginx 是一个用于处理 Web 请求的服务器
+具有高并发处理能力，支持反向代理和负载均衡
+适用于网站托管、静态资源处理和反向代理。
+
+Heartbeat
+Heartbeat 是一个用来监控服务器状态的工具
+能检测故障并自动切换到备用服务器
+适用于需要高可用性的服务器集群。
+
+## 网站缓存
+
+squid
+squid 是一个代理服务器和缓存服务器，支持 HTTP、HTTPS、FTP 等协议。  
+它可以缓存网络内容，减少带宽使用，提高访问速度。  
+适用于 Web 内容加速、网络过滤和访问控制。
+
+nginx-cache
+nginx-cache 是 Nginx 的缓存功能，用于缓存静态和动态内容。  
+它可以显著降低服务器负载，提高访问速度。  
+适用于高并发的 Web 服务和内容分发网络（CDN）。
+
+varnish
+varnish 是一个专门用于 HTTP 加速的缓存服务器，性能极高。  
+常用于缓存动态网站内容，加速 Web 应用响应时间。  
+适用于高流量的 Web 服务和内容分发网络。
+
+## 应用服务器
+
+nginx+tomcat
+nginx 处理前端请求，并将动态请求转发给 Tomcat。  
+nginx 负责静态资源的处理和反向代理，Tomcat 负责 Java Web 应用的运行。  
+适用于高并发的 Java Web 应用，静态内容多、需要负载均衡的场景。
+
+WEBlogic
+WEBlogic 是一个企业级的 Java EE 应用服务器，由 Oracle 开发。  
+支持全面的 Java EE 标准，提供强大的企业级功能，如事务管理、消息服务、安全性等。  
+适用于需要高可靠性、高可用性的企业级 Java 应用，如大型企业的 ERP、CRM 系统。
+
+WildFly
+WildFly 是一个轻量级的开源 Java EE 应用服务器，前身是 JBoss AS。  
+启动速度快，资源占用少，支持最新的 Java EE 标准。  
+适用于需要灵活配置和快速响应的 Java EE 应用，适合开发和生产环境。
+
+Jetty
+Jetty 是一个轻量级的 Java 应用服务器，特别适合嵌入式和云环境。  
+启动速度快，容易集成到其他 Java 应用中，支持 WebSocket 和 HTTP/2。  
+适用于需要快速启动、嵌入式应用和微服务架构的 Java Web 应用。
+
+JBoss
+JBoss 是一个开源的 Java EE 应用服务器，现已被 WildFly 继承。  
+提供全面的 Java EE 支持，具有企业级功能和可扩展性。  
+适用于中大型 Java EE 应用的开发和部署，尤其是在需要开源解决方案的场景下。
+
+nginx+PHP
+nginx 处理前端请求，并将 PHP 请求交给 PHP-FPM 处理。  
+nginx 负责静态资源的处理和反向代理，PHP-FPM 处理动态 PHP 脚本。  
+适用于需要高并发处理能力的 PHP Web 应用，如内容管理系统（CMS）和电商网站。
+
+## NOSQL 库
+
