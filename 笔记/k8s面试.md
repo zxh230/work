@@ -340,8 +340,6 @@ DaemonSet资源对象会在每个 Kubernetes集群中的节点上运行，并且
 
 通过创建 Service，可以为一组具有相同功能的容器应用提供一个统一的入口地址，并且将请求负载分发到后端的各个容器应用上。其主要类型有：
 
-13  
-
 • ClusterIP: 虚拟的服务IP地址, 该地址用于 Kubernetes集群内部的 Pod访问, 在 Node上 kube- proxy通过设置的 iptables规则进行转发；
 
 · NodePort：使用宿主机的端口，使能够访问各 Node的外部客户端通过 Node的IP地址和端口号就能访问服务；
