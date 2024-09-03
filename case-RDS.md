@@ -4,5 +4,16 @@
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903184227.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903184528.png)
 
-创建 txt 文件
+在 Windows 上创建空 txt 文件
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903185349.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903185541.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903185604.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903185625.png)
+
+导入成功
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903185721.png)
+
+备份计划
 
