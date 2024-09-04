@@ -32,5 +32,9 @@
 配置 lnmp 安装 wordpress
 
 ```shell
-tar -xf wordpress
+# 官网下载wordpress压缩包
+# 解压
+unzip wordpress-6.6.1.zip 
+# 修改nginx配置文件
+
 ```
