@@ -25,5 +25,12 @@
 
 创建弹性伸缩组
 
-![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904180307.png)
-![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904180328.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904180853.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904180822.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904180950.png)
+
+配置 lnmp 安装 wordpress
+
+```shell
+tar -xf wordpress
+```
