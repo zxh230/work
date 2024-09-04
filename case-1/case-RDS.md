@@ -18,3 +18,29 @@
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903185721.png)
 
+数据库备份
+
+```shell
+# 安装mysql-server
+yum -y install mysql-server
+systemctl start mysql-server
+mysql
+##
+create database hansir;
+use hansir;
+create table test1(id int(10) primary key, name varchar(30), age int(10));
+exit
+# 导出数据库
+mysqldump hansir > hansir.sql
+# 登录阿里云rds
+mysql -uroot -p123_comZXH -h rm-2ze5334ki386dfa25.mysql.rds.aliyuncs.com
+create database hansir;
+exit
+# 导入
+mysql -uroot -p123_comZXH -h rm-2ze5334ki386dfa25.mysql.rds.aliyuncs.com hansir < hansir.sql 
+# 查看
+mysql -uroot -p123_comZXH -h rm-2ze5334ki386dfa25.mysql.rds.aliyuncs.com
+show databases;
+```
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904215139.png)
