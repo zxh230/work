@@ -10,3 +10,7 @@
 将没通过的全部授权开通
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904233740.png)
+
+等待初始化完成
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904234448.png)
