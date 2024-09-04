@@ -2,6 +2,9 @@
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903184206.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903184227.png)
+
+授权数据库
+
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903184528.png)
 
 在 Windows 上创建空 txt 文件
@@ -14,6 +17,4 @@
 导入成功
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240903185721.png)
-
-备份计划
 
