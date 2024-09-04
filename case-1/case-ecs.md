@@ -39,6 +39,7 @@ unzip wordpress-6.6.1.zip
 # 修改nginx配置文件
 vim /etc/nginx/nginx.conf
 ###
+user nginx;
 worker_processes  1;
 events {
     worker_connections  1024;
@@ -69,6 +70,7 @@ http {
     }
 }
 ###
-# 授权
+# 修改php-fpm配置文件
+
 
 ```
