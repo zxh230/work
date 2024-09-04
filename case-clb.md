@@ -38,5 +38,11 @@ curl 127.0.0.1
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904095120.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904095136.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904095205.png)
+
+选择 http 协议
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904095249.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904095327.png)
+访问 clb 的公网 ip 加端口
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904104240.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904104242.png)
