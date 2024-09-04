@@ -10,4 +10,6 @@
 
 因为无法备案，无法进行下一步
 
-备案需要购买
+备案需要购买包月三个月以上的 ecs 实例
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905002009.png)
