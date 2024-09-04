@@ -54,7 +54,7 @@ http {
         server_name  localhost;
         location / {
             root   html;
-            index  index.html index.htm;
+            index  index.php;
         }
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
@@ -70,7 +70,59 @@ http {
     }
 }
 ###
+# 安装php
+yum -yq install php php-cli php-fpm php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-pear php-bcmath php-redis php-ldap php-intl php-pecl-imagick php-opcache
 # 修改php-fpm配置文件
-
-
+vim/etc/php-fpm.d/www.conf 
+###
+[www]
+user = nginx
+group = nginx
+listen = /run/php-fpm/www.sock
+listen.owner = nginx
+listen.group = nginx
+listen.mode = 0660
+listen.allowed_clients = 127.0.0.1
+pm = dynamic
+pm.max_children = 50
+pm.start_servers = 5
+pm.min_spare_servers = 5
+pm.max_spare_servers = 35
+slowlog = /var/log/php-fpm/www-slow.log
+php_admin_value[error_log] = /var/log/php-fpm/www-error.log
+php_admin_flag[log_errors] = on
+php_value[session.save_handler] = files
+php_value[session.save_path]    = /var/lib/php/session
+php_value[soap.wsdl_cache_dir]  = /var/lib/php/wsdlcache
+###
+# 修改wordpress连接配置
+cp /wordpress/wp-config-sample.php /wordpress/wp-config.php
+vim /wordpress/wp-config.php
 ```
+```php
+define( 'DB_NAME', '阿里云RDS数据库' );
+/** Database username */
+define( 'DB_USER', '阿里云RDS数据库账号' );
+/** Database password */
+define( 'DB_PASSWORD', '阿里云RDS数据库密码' );
+/** Database hostname */
+define( 'DB_HOST', '阿里云RDS数据库内网地址' );
+/** Database charset to use in creating database tables. */
+define( 'DB_CHARSET', 'utf8' );
+/** The database collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );
+###
+```
+```shell
+# 启动nginx与php-fpm
+nginx
+systemctl start php-fpm
+# 访问ECS公网ip/index.php测试
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904213441.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904213523.png)
+
+点击登录
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904213548.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240904213650.png)
