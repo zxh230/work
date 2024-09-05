@@ -890,6 +890,19 @@ jenkins 添加 sonarqube
 
 重启后再次登录
 
-绑定 gitlab 令牌
+生成登录令牌
 
-![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905205029.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905205833.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905205926.png)
+
+复制并保留令牌
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905205944.png)
+
+到 jenkins 中添加凭据
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210114.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210139.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210201.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210323.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210352.png)
