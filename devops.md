@@ -867,3 +867,14 @@ kubectl get all -n devops -owide
 jenkins 安装插件
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240902175013.png)
+
+访问 sonarqube 的端口号
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905191842.png)
+
+初始用户名密码为 admin/admin，第一次登录需要修改密码
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905192034.png)
+
+jenkins 添加 sonarqube 
+
