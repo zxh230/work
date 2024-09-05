@@ -908,6 +908,9 @@ jenkins 添加 sonarqube
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210352.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210643.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210706.png)
+
+在 Jenkins 中安装
+
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905211839.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905212007.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905212106.png)
