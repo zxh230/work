@@ -602,6 +602,11 @@ public class TestController {
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240901153347.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240901153427.png)
 
+也可以点击生成，生成一个令牌
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905180811.png)
+
+
 转到 gitlab 页面
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240901153510.png)
