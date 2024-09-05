@@ -906,3 +906,5 @@ jenkins 添加 sonarqube
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210201.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210323.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210352.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210643.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905210706.png)
