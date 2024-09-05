@@ -878,3 +878,6 @@ jenkins 安装插件
 
 jenkins 添加 sonarqube 
 
+生成令牌
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905192452.png)
