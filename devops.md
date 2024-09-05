@@ -882,4 +882,14 @@ jenkins 添加 sonarqube
 
 下载中文插件
 
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905204811.png)
 
+重新启动服务
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905204905.png)
+
+重启后再次登录
+
+绑定 gitlab 令牌
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240905205029.png)
