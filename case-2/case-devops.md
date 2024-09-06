@@ -118,3 +118,25 @@ kubectl apply -f calico.yaml
 
 **==从节点加入集群，加入之前需写入三台机器的域名解析==**
 
+```shell
+# 更改消息日志不更新(三台服务器)
+vim  <<EOF | tee /etc/rsyslog.d/01-blocklist.conf
+###
+if $msg contains "run-containerd-runc-k8s" and $msg contains "mount: Deactivated successfully" then {
+ stop
+}
+EOF
+###
+# 重启
+systemctl daemon-reload 
+systemctl restart rsyslog.service
+```
+```shell
+# 查看节点信息
+kubectl get po -n kube-system
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906091225.png)
+
+******
+部署 devops
+
