@@ -56,12 +56,9 @@ SystemdCgroup = true
 config_path = "/etc/containerd/certs.d"
 ###
 ```
-
-|![image-20240722160050972](https://gitee.com/zhaojiedong/img/raw/master/image-20240722160050972.png)
-
-|![image-20240722160022913](https://gitee.com/zhaojiedong/img/raw/master/image-20240722160022913.png)
-
-|![image-20240722155931246](https://gitee.com/zhaojiedong/img/raw/master/image-20240722155931246.png)
+![image-20240722160050972](https://gitee.com/zhaojiedong/img/raw/master/image-20240722160050972.png)
+![image-20240722160022913](https://gitee.com/zhaojiedong/img/raw/master/image-20240722160022913.png)
+![image-20240722155931246](https://gitee.com/zhaojiedong/img/raw/master/image-20240722155931246.png)
 
 ```shell
 # 创建镜像索引
