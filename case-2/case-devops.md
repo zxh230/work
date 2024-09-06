@@ -153,3 +153,18 @@ jenkins 安装：gitlab、git Parameter、kubernetes、gitee、Maven Intergratio
 
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906095531.png)
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906093759.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906104132.png)
+
+安装 sonar，maven工具
+```shell
+# 在nfs服务器上安装sonar
+curl -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.1.0.4477-linux-x64.zip -o sonar-scanner-cli-6.1.0.4477-linux-x64.zip
+unzip sonar-scanner-cli-6.1.0.4477-linux-x64.zip
+mv sonar-scanner-6.1.0.4477-linux-x64 /mydata/nfs/jenkins/sonar
+# 安装maven
+tar -xf apache-maven-3.9.9-bin.tar.gz -C /mydata/nfs/jenkins/
+cd /mydata/nfs/jenkins/
+mv apache-maven-3.9.9 maven
+```
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906104346.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906104348.png)
