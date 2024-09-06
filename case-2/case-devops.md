@@ -140,3 +140,14 @@ kubectl get po -n kube-system
 ******
 部署 devops
 
+jenkins 安装：gitlab、git Parameter、kubernetes、gitee、Maven Intergration、Publish Over SSH ，SonarQube Scanner等插件
+
+更改 admin 用户密码
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906093427.png)
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906093448.png)
+
+更改保存后重新登录即可
+
+配置 jenkins
+
