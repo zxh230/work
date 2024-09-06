@@ -151,3 +151,4 @@ jenkins 安装：gitlab、git Parameter、kubernetes、gitee、Maven Intergratio
 
 配置 jenkins
 
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20240906093759.png)
