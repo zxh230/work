@@ -36,6 +36,8 @@ crictl：充当agent，执行与容器相关的命令，例如创建容器
 
 service：把信息转发到kube-proxy，*kube-proxy使用集群代理转发*
 
+
+
 ------
 
 ```shell
