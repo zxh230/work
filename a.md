@@ -1,1 +1,0 @@
-熟悉：nginx，shell，k 8 s，docker，
