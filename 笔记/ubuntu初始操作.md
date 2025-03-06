@@ -82,5 +82,24 @@ add-apt-repository multiverse
 apt update
 # 安装依赖
 apt install git build-essential devscripts debhelper dh-python python3-all python3-setuptools python3-dev apache2 libapache2-mod-wsgi-py3 python3-schema python3-cheetah python3-dns python3-sphinx
+# 克隆cobbler仓库
+git clone https://github.com/cobbler/cobbler.git
+# 进入目录开始构建deb包
+a2enmod proxy
+a2enmod proxy_http
+a2enmod rewrite
+ln -s /srv/tftp /var/lib/tftpboot
+systemctl restart apache2
+# 开始构建
+make debs
+```
+
+构建成功后会显示：
+
+![image.png](https://gitee.com/zhaojiedong/img/raw/master/20250306180510.png)
+
+```shell
+# 返回上一级目录准备安装
+cd ..
 
 ```
