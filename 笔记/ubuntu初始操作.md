@@ -14,5 +14,6 @@ vim /etc/ssh/sshd_config # 修改sshd配置文件
 ```
 
 取消此行注释并修改为 yes
+
 ![image.png](https://gitee.com/zhaojiedong/img/raw/master/20250306171738.png)
 
