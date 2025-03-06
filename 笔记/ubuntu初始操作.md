@@ -81,6 +81,6 @@ add-apt-repository multiverse
 # 更新软件包列表
 apt update
 # 安装依赖
-apt install git build-essential devscripts debhelper dh-python python3-all python3-setuptools python3-dev apache2 libapache2-mod-wsgi-py3
+apt install git build-essential devscripts debhelper dh-python python3-all python3-setuptools python3-dev apache2 libapache2-mod-wsgi-py3 python3-schema python3-cheetah python3-dns python3-sphinx
 
 ```
