@@ -70,3 +70,17 @@ service ssh restart
 systemctl disable apparmor
 ```
 
+#### 开始安装 cobbler
+
+安装依赖包
+
+```shell
+# 启用 Universe 和 Multiverse 仓库
+add-apt-repository universe
+add-apt-repository multiverse
+# 更新软件包列表
+apt update
+# 安装依赖
+apt install git build-essential devscripts debhelper dh-python python3-all python3-setuptools python3-dev apache2 libapache2-mod-wsgi-py3
+
+```
