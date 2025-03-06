@@ -63,3 +63,10 @@ vim /etc/motd
 # 重启sshd服务
 service ssh restart
 ```
+
+##### 关闭安全模块
+
+```shell
+systemctl disable apparmor
+```
+
