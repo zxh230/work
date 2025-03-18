@@ -1,10 +1,8 @@
----
-typora-copy-images-to: upload
----
-
 redis负载更新
 
-主机：node01~node08
+主机名：node01~node08
+
+已经事前做好 ssh 免密登录
 
 1，在node01~node06上安装redis
 
