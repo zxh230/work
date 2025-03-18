@@ -1,16 +1,14 @@
----
-typora-copy-images-to: upload
----
+ansible 配置文件实例：
 
-[defaults]
-inventory = /etc/ansible/inventory
-remote_user = root
-host_key_checking = False
+> [defaults]
+> inventory = /etc/ansible/inventory
+> remote_user = root
+> host_key_checking = False
 
-
-
+编写清单
 vim /etc/ansible/inventory 
 
+变量类型：
 node01  ansible_ssh_user=root ansible_ssh_pass=123.com ## 主机变量
 
 [blog:vars]  ## 组变量
@@ -39,17 +37,13 @@ ansible blog -m shell -a 'yum -y install httpd php php-mysqlnd'
 
 -m：调用模块
 
-
-
-
+报错实例：
 
 node01 | UNREACHABLE! => {
     "changed": false,
     "msg": "Invalid/incorrect password: Warning: Permanently added 'node01' (ED25519) to the list of known hosts.\r\nPermission denied, please try again.",
     "unreachable": true
 } ## 用户名和密码不匹配
-
-
 
 10.15.200.103 | UNREACHABLE! => {
     "changed": false,

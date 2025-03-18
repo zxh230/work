@@ -1,5 +1,3 @@
-# 自动化补考
-
 ==启动node01,node02,node03,node05作为mha集群（可自行替换主机）==
 
 mysql节点：node01(主)，node02(从)，node03(从)

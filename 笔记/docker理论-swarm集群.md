@@ -1,5 +1,3 @@
-# docker swarm
-
 docker swarm结构：
 	manager 节点  —>  work 节点
 	manager 主要用作管理，可以对任何 work 节点下达指令

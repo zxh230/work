@@ -8,13 +8,6 @@
 ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447118.png)
  ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447744.png)
  ![](https://gitee.com/zhaojiedong/img/raw/master/202407311447963.png)
->vim编辑器用法：<br />
->
->D 删除当前行内光标后的内容 <br />
->
->: noh  取消搜索高亮 <br />
->
->搜索后 n 查找下一个
 ##### 下载镜像
 ```shell
 # kube01

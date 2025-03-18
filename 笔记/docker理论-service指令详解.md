@@ -1,5 +1,3 @@
-### docker service指令详解
-
 #### docker service
 
 ```shell

@@ -1,6 +1,3 @@
----
-typora-copy-images-to: upload
----
 
 ![image-20240520085440900](https://gitee.com/zhaojiedong/img/raw/master/202405200855597.png)
 
