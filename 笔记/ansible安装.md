@@ -25,6 +25,4 @@ inventory = /etc/ansible/inventory
 remote_user = root 
 host_key_checking = False
 ###
-# 配置清单
-
 ```
