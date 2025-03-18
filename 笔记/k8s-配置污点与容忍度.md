@@ -1,5 +1,3 @@
-# 7.24作业
-
 要求：
 1、redis部署在node1和node2上，当网络不通和无法ready时，容忍50s后被迁移。
 2、mysql部署在node1和node3上，但是无法被系统驱离。
