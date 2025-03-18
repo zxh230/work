@@ -197,4 +197,4 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 5
 ```
-滚动更新失败的原因[[Rs#^a59729]]
+滚动更新失败的原因[[k8s理论-Rs#^a59729]]
