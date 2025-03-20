@@ -42,5 +42,6 @@ mysql -uroot -p123.com
 SET GLOBAL log_bin_trust_function_creators = 0;
 quit
 # 编译
+yum install pcre* libevent-devel pcre-devel libxml2-devel net-snmp-devel
 
 ```
