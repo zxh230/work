@@ -15,5 +15,6 @@ wget https://cdn.zabbix.com/zabbix/sources/stable/7.2/zabbix-7.2.4.tar.gz
 tar -zxvf zabbix-7.2.4.tar.gz 
 groupadd --system zabbix
 useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monitoring System" zabbix
+yum -y install mariadb-server
 
 ```
