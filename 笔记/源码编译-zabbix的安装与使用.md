@@ -16,5 +16,23 @@ tar -zxvf zabbix-7.2.4.tar.gz
 groupadd --system zabbix
 useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monitoring System" zabbix
 yum -y install mariadb-server
+systemctl start mariadb
+mysql
+```
+
+配置数据库
+
+```mysql
+create database zabbix character set utf8mb4 collate utf8mb4_bin;
+create user 'zabbix'@'localhost' identified by '123.com';
+grant all privileges on zabbix.* to 'zabbix'@'localhost';
+SET GLOBAL log_bin_trust_function_creators = 1;
+quit
+```
+
+导入数据库
+
+```shell
+cd /root/zabbix-7.2.4/database/mysql
 
 ```
