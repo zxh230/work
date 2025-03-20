@@ -34,5 +34,13 @@ quit
 
 ```shell
 cd /root/zabbix-7.2.4/database/mysql
+mysql -uzabbix -p123.com zabbix < schema.sql
+mysql -uzabbix -p123.com zabbix < images.sql
+mysql -uzabbix -p123.com zabbix < data.sql
+# 进入mysql禁用log_bin_trust_function_creators
+mysql -uroot -p123.com
+SET GLOBAL log_bin_trust_function_creators = 0;
+quit
+# 编译
 
 ```
