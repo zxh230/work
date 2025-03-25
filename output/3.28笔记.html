@@ -1,0 +1,28 @@
+#### 创建表
+
+create table hot_movies(id int(11) primary key auto_increment, # 主键约束自动增长
+
+movie_name char(255) not null, # 禁止为空
+
+movie_url char(255) not null ) engine=InnoDB charset=utf8;
+
+#### 添加数据
+
+insert into hot_movies(movie_name,movie_url)values('cloud63天安门','http://www.example.cn/static/6ecc/6666.jpg');
+
+#### 数据库备份
+
+mysqldump 6ecc > 6ecc.sql
+
+#### 恢复数据库
+
+source /root/6ecc.sql;
+
+#### 数据库授权
+
+grant all privileges on *.* to 'nicaicai'@'10.15.200.102' identified by '123.com';
+
+#### 异地备份（需要授权）
+
+mysqldump -h10.15.200.101 -unicaicai -p'123.com' 6ecc > 6ecc.sql
+
