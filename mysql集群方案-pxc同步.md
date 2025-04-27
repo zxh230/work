@@ -15,6 +15,5 @@ for h in {1..3}; do ssh node0$h "yum install https://repo.percona.com/yum/percon
 # 启用
 for h in {1..3}; do ssh node0$h "percona-release setup pxc-57";done
 # 安装
-yum -y install Percona-XtraDB-Cluster-57
-
+for h in {1..3}; do ssh node0$h "yum -y install Percona-XtraDB-Cluster-57";done
 ```
