@@ -16,4 +16,19 @@ for h in {1..3}; do ssh node0$h "yum install https://repo.percona.com/yum/percon
 for h in {1..3}; do ssh node0$h "percona-release setup pxc-57";done
 # 安装
 for h in {1..3}; do ssh node0$h "yum -y install Percona-XtraDB-Cluster-57";done
+# 启动mysql
+systemctl start mysql
+# 查看随机密码
+grep 'temporary password' /var/log/mysqld.log
+```
+![image.png](https://raw.githubusercontent.com/zxh230/image-/main/图片/20250427174819.png)
+
+```shell
+# 更改mysql密码
+mysql -uroot -p"oxF+79Mq:Lqr"
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+# 退出并关闭mysql
+exit
+systemctl stop mysql
+# 
 ```
