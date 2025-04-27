@@ -30,5 +30,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
 # 退出并关闭mysql
 exit
 systemctl stop mysql
-# 
+# 以上操作在三台系统上操作完全同步与一致
+# 更改mysql配置文件
+
 ```
