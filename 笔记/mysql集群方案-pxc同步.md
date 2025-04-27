@@ -31,6 +31,30 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
 exit
 systemctl stop mysql
 # 以上操作在三台系统上操作完全同步与一致
-# 更改mysql配置文件
+# 更改mysql配置文件(需要更改的位置已使用*标记)(node01~node03)
+vim /etc/my.cnf
+###
+# PXC集群中每个MySQL实例的唯一标识，不能重复*
+server-id=1
+wsrep_provider=/usr/lib64/galera3/libgalera_smm.so
+# PXC集群的名称和所有服务地址*
+wsrep_cluster_name=pxc-cluster
+wsrep_cluster_address=gcomm://10.15.200.101,10.15.200.102,10.15.200.103
+# 当前节点的名称和服务地址*
+wsrep_node_name=node01
+wsrep_node_address=10.15.200.101
+# 指定同步方法和账户信息，这个用户在下文会进行创建
+wsrep_sst_method=xtrabackup-v2 
+wsrep_sst_auth= sstuser:123456
+#开启严厉模式,它会阻止用户执行 Percona XtraDB Cluster 所不支持的功能。
+pxc_strict_mode=ENFORCING  
+# 指定二进制日志的格式
+binlog_format=ROW 
+# 指定默认的存储引擎
+default_storage_engine=InnoDB 
+# Galera 仅支持 InnoDB 的 interleaved(2) 锁定模式:
+# 该模式下所有 INSERT SQL 都不会有表级 AUTO-INC 锁,多个语句可以同时执行
+innodb_autoinc_lock_mode=2 
+###
 
 ```
