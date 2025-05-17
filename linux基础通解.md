@@ -1990,7 +1990,7 @@ sed -n '1~2p' test.txt  #奇数行
 sed -n '2~2p' test.txt  #偶数行
 ```
 
-### [](https://wangchujiang.com/linux-command/c/sed.html#%E6%89%93%E5%8D%B0%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%8B%E4%B8%80%E8%A1%8C)打印匹配字符串的下一行
+### [打印匹配字符串的下一行](https://wangchujiang.com/linux-command/c/sed.html#%E6%89%93%E5%8D%B0%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%8B%E4%B8%80%E8%A1%8C)
 
 ```shell
 grep -A 1 SCC URFILE
